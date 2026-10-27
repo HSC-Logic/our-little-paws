@@ -1,0 +1,28 @@
+-- Run with: supabase test db (Supabase CLI + Docker).
+begin;
+create extension if not exists pgtap with schema extensions;
+select plan(12);
+insert into auth.users(id,email) values('00000000-0000-4000-8000-000000000001','a@example.invalid'),('00000000-0000-4000-8000-000000000002','b@example.invalid'),('00000000-0000-4000-8000-000000000003','c@example.invalid');
+insert into public.profiles(id,display_name) values('00000000-0000-4000-8000-000000000001','A'),('00000000-0000-4000-8000-000000000002','B'),('00000000-0000-4000-8000-000000000003','C');
+insert into public.households(id) values('10000000-0000-4000-8000-000000000001'),('10000000-0000-4000-8000-000000000002');
+insert into public.household_members(household_id,user_id) values('10000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000001'),('10000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000002'),('10000000-0000-4000-8000-000000000002','00000000-0000-4000-8000-000000000003');
+insert into public.letters(household_id,sender,recipient,subject,body,envelope) values('10000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000001','00000000-0000-4000-8000-000000000001','Private to A','private','rose');
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-4000-8000-000000000001',true);
+select is((select count(*)::int from public.households),1,'Only own household visible');
+select throws_ok($$insert into public.households(name) values('Intruder')$$,'42501','permission denied for table households','Households cannot be self-created');
+select throws_ok($$update public.households set treats=999999$$,'42501','permission denied for table households','Cannot assign own rewards');
+select lives_ok($$select public.world_action('{"kind":"adopt","species":"puppy"}', '20000000-0000-4000-8000-000000000001')$$,'Authorized adoption works');
+select lives_ok($$select public.world_action('{"kind":"game","game":"notes","score":999999,"reward":999999}', '20000000-0000-4000-8000-000000000002')$$,'Game ignores arbitrary rewards');
+select is((select treats from public.households),33,'Only fixed 3 treat reward');
+select lives_ok($$select public.world_action('{"kind":"game","game":"notes"}', '20000000-0000-4000-8000-000000000002')$$,'Duplicate request is idempotent');
+select is((select treats from public.households),33,'Duplicate grants no reward');
+select throws_ok($$select public.world_action('{"kind":"game","game":"notes"}', '20000000-0000-4000-8000-000000000003')$$,'P0001','Another participation gift is available in a minute','Cooldown cannot be bypassed');
+select set_config('request.jwt.claim.sub','00000000-0000-4000-8000-000000000002',true);
+select is((select count(*)::int from public.letters),0,'Other members self-addressed letters remain private');
+select set_config('request.jwt.claim.sub','00000000-0000-4000-8000-000000000003',true);
+select is((select count(*)::int from public.pets),0,'Cross-household pets hidden');
+set local role anon;
+select throws_ok($$select public.get_world()$$,'42501','permission denied for function get_world','Unauthenticated RPC denied');
+select * from finish();
+rollback;
