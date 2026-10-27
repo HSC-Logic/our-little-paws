@@ -177,7 +177,7 @@ try {
   await page.goto(url + "#/music");
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.waitForFunction(() => {
-    const a = document.querySelector("audio");
+    const a = document.querySelector('audio[aria-label="Our little soundtrack"]');
     return a && !a.paused && a.currentTime > 0;
   });
   check(true, "Bundled original music plays from the offline cache");
