@@ -1,4 +1,5 @@
-import { Heart, Sparkles } from "lucide-react";
+import { Heart } from "lucide-react";
+import { DecorationArt } from "../components/DecorationArt";
 import { PetArt } from "../components/PetArt";
 import { catalog } from "../lib/model";
 import type { Props } from "./types";
@@ -22,7 +23,11 @@ export function Decorate({ world, act }: Props) {
               {item.slot === "accessory" ? (
                 <PetArt species="kitten" accessory={item.id} />
               ) : (
-                <Sparkles size={42} />
+                <DecorationArt
+                  item={item.id}
+                  slot={item.slot}
+                  label={item.name}
+                />
               )}
             </div>
             <small>{item.slot}</small>

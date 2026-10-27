@@ -1,0 +1,32 @@
+{
+  "method": "Built-in image_gen",
+  "created": "2026-10-27",
+  "description": "Original artwork inspired by the user's isometric dollhouse and plush pet style references. No source-reference image embedded in the application.",
+  "assets": [
+    {
+      "file": "cozy-room.webp",
+      "prompt": "Create an original premium cozy virtual-pet game background, wide landscape 3:2 composition. An exquisitely illustrated isometric open dollhouse room on a mint-green garden island, full whole room visible with breathing room around it. Soft lavender paneled walls forming a corner, rounded pink heart-decorated door on back right, arched sunny window with cream curtains back left, lush hanging plants, pastel fairy-light garland, framed tiny botanical art, a little lilac sofa left wall, wooden record-player cabinet and books right wall, round mint and pink pet beds, plush aqua oval rug CENTRAL LARGE OPEN FLOOR SPACE intentionally empty for separately rendered interactive animals. Small toys, flowers and books around perimeter. Cozy sunshine, warm atmospheric lighting, tactile painted 2.5D cartoon style, gentle purple-brown outlines, handcrafted storybook charm, pastel pink mint lilac butter-yellow, rich details and soft dimensional shading. Straight-on isometric camera about 30 degrees looking down. NO ANIMALS, NO PEOPLE, NO WORDS, NO TEXT, NO LOGOS, no UI elements. Fill frame with room while preserving entire floor. Professional game environment art, polished and inviting.",
+      "transparent": false
+    },
+    {
+      "file": "puppy.webp",
+      "prompt": "Original premium virtual-pet game character asset. One adorable baby golden cream puppy, floppy caramel ears, short rounded muzzle, plump plush body, tiny paws, sitting facing viewer with very slight three-quarter angle, gigantic shiny deep chestnut eyes with expressive catchlights, rosy cheeks, happy open small mouth, soft fluffy cheek tufts. High quality polished hand-painted 2.5D kawaii illustration with soft dimensional shading, gentle cocoa contour lines, pastel pink mint and lilac reflected light, warm sunshine. A coherent character family for a cozy illustrated dollhouse game, normal real puppy species, no fantasy horns or wings. Whole body centered including paws and tail, ample transparent margin around silhouette. No clothes, no collar, no props, no ground plane, no shadow outside silhouette, no text. Genuinely transparent background.",
+      "transparent": true
+    },
+    {
+      "file": "kitten.webp",
+      "prompt": "Original premium virtual-pet game character asset. One adorable baby lavender-grey kitten with cream face and belly, triangular plush ears with pink inner ears, fluffy curved tail, short rounded muzzle, plump plush body, tiny paws, sitting facing viewer with very slight three-quarter angle, gigantic shiny deep violet-blue eyes with expressive catchlights, rosy cheeks, happy open small mouth, soft fluffy cheek tufts. High quality polished hand-painted 2.5D kawaii illustration with soft dimensional shading, gentle cocoa contour lines, pastel pink mint and lilac reflected light, warm sunshine. A coherent character family for a cozy illustrated dollhouse game, normal kitten, no fantasy horns or wings. Whole body centered including paws and tail, ample transparent margin around silhouette. No clothes, no collar, no props, no ground plane, no shadow outside silhouette, no text. Genuinely transparent background.",
+      "transparent": true
+    },
+    {
+      "file": "bunny.webp",
+      "prompt": "Original premium virtual-pet game character asset. One adorable baby white cream bunny rabbit, long upright rounded ears with pastel pink inner ears, fluffy little round tail, plump plush body, tiny paws, sitting facing viewer with very slight three-quarter angle, gigantic shiny deep rose-chestnut eyes with expressive catchlights, rosy cheeks, happy tiny mouth, soft fluffy cheek tufts. High quality polished hand-painted 2.5D kawaii illustration with soft dimensional shading, gentle cocoa contour lines, pastel pink mint and lilac reflected light, warm sunshine. A coherent character family for a cozy illustrated dollhouse game, normal bunny species, no fantasy horns or wings. Whole body centered including paws ears and tail, ample transparent margin around silhouette. No clothes, no collar, no props, no ground plane, no shadow outside silhouette, no text. Genuinely transparent background.",
+      "transparent": true
+    },
+    {
+      "file": "hamster.webp",
+      "prompt": "Original premium virtual-pet game character asset. One adorable baby honey golden hamster, round ears with soft pink inner ears, cream chubby cheeks and belly, very small plump plush body, tiny paws held close to belly, sitting facing viewer with very slight three-quarter angle, gigantic shiny deep chestnut eyes with expressive catchlights, rosy cheeks, happy tiny mouth, soft fluffy cheek tufts. High quality polished hand-painted 2.5D kawaii illustration with soft dimensional shading, gentle cocoa contour lines, pastel pink mint and lilac reflected light, warm sunshine. A coherent character family for a cozy illustrated dollhouse game, normal hamster species, no fantasy horns or wings. Whole body centered including paws and ears, ample transparent margin around silhouette. No clothes, no collar, no props, no ground plane, no shadow outside silhouette, no text. Genuinely transparent background.",
+      "transparent": true
+    }
+  ]
+}

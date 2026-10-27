@@ -1,5 +1,12 @@
 import { useEffect, useState, lazy, Suspense } from "react";
-import { HashRouter, NavLink, Route, Routes, Link } from "react-router-dom";
+import {
+  HashRouter,
+  NavLink,
+  Route,
+  Routes,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import {
   QueryClient,
   QueryClientProvider,
@@ -413,11 +420,19 @@ function App() {
     </div>
   );
 }
+function RoomScrollReset() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 export default function Root() {
   return (
     <MotionConfig reducedMotion="user">
       <QueryClientProvider client={client}>
         <HashRouter>
+          <RoomScrollReset />
           <App />
         </HashRouter>
       </QueryClientProvider>

@@ -8,7 +8,7 @@
 
 ## What works
 
-- Animated welcome and four original SVG pets: Mochi the puppy, Luna the kitten, Coco the bunny, and Peanut the hamster. Adopt, select, rename, and care for each pet.
+- Animated welcome and four original illustrated pets: Mochi the puppy, Luna the kitten, Coco the bunny, and Peanut the hamster. Adopt, select, rename, and care for each pet.
 - Feed, treat, cuddle, head pats, play, groom, sleep/wake, and dance; bounded needs, cooldowns, adoption age, animation feedback, and activity history.
 - A responsive illustrated home; wallpapers, rugs, beds, and shared accessories purchased using non-purchasable Love Treats.
 - Music room with three original synthesized instrumental loops, playlist selection, favorites, volume/play controls, and dancing animals. Shared mode shares track selection and favorites. Playback controls remain device-local.
@@ -40,7 +40,7 @@ npm run build
 npm run preview
 ```
 
-`npm run test:e2e` starts its own server on port 5190. `npm run format` formats application and test code. `scripts/screenshots.mjs` captures screenshots against a server on port 5175; change the URL there to match your local server.
+`npm run test:e2e` starts its own server on port 5190. `npm run format` formats application and test code. `scripts/screenshots.mjs` starts its own isolated demo server on port 5195 and captures desktop/mobile previews without using your shared household.
 
 ## Demo mode
 
@@ -118,7 +118,7 @@ The workflow derives `VITE_BASE_PATH=/${repository-name}/`. For a user/organizat
 src/
   App.tsx                  Routing, auth, home, query/realtime lifecycle
   components/
-    PetArt.tsx             Four original layered SVG animals
+    PetArt.tsx             Four original transparent character illustrations
     Room.tsx               Responsive illustrated room and placement
     Dialog.tsx             Focus containment, Escape, focus restoration
   features/*.tsx           Separate home, adoption, music, mail, decor, game, settings routes
@@ -126,7 +126,8 @@ src/
     model.ts               Types, catalog, species, pure care rules
     api.ts                 Typed demo/Supabase command adapters and validation
     ui.ts                  Ephemeral Zustand selection and notices
-  styles.css               Theme tokens, illustrations, motion, responsive styles
+  styles.css               Base layout and accessible UI styles
+  styles/game-theme.css    Pastel game tokens, dollhouse layout, character motion
   *.test.tsx / lib/*.test.ts Unit and component tests
 supabase/
   migrations/              Schema, RLS, secure transactional RPCs, storage
@@ -135,6 +136,7 @@ supabase/
   config.toml              Local Supabase configuration with signup disabled
 scripts/                   Embedded database checks and screenshot capture
 tests/                     Desktop and mobile Playwright journeys
+public/art/                Original room and pets, optimized WebP, prompt provenance
 public/sw.js               Static assets only; no private API response cache
 docs/screenshots/          Actual application previews
 .github/workflows/         Verification and Pages deployment
@@ -142,7 +144,7 @@ docs/screenshots/          Actual application previews
 
 ## Artwork, fonts, and audio
 
-All animal and room art was created specifically for this application as local SVG/HTML/CSS. No stock photos, copyrighted game characters, or remote illustration dependencies are used. Edit `PetArt.tsx` and `Room.tsx` to update art while preserving the common outlines and palette. Theme tokens are in `styles.css`; Fredoka and Nunito load from Google Fonts with local system fallbacks. For an entirely self-contained deployment, self-host their appropriately licensed font files and update `index.html`.
+The isometric room and four fluffy character illustrations were generated specifically for this application with the built-in image-generation tool, inspired by the supplied cozy-game references. The artwork assets are local optimized WebP files under `public/art/`; character alpha transparency is preserved. The complete prompt set and asset provenance are recorded in `public/art/provenance.json`. No reference screenshots, stock photos, or remote illustration dependencies are embedded. Painted floral rugs and quilted pet beds use separate transparent assets, with a clean background so the selected items replace their original room counterparts. All layers use one normalized 1536 × 1024 scene to preserve placement across screen sizes. Decoration prompts are in `public/art/decorations-provenance.json`. Edit `PetArt.tsx` and `Room.tsx` for interaction overlays and predefined placement. Decorative bows, hats, and motion remain CSS/SVG; animations move the illustrated characters rather than rendering separate facial frames. Theme tokens and responsive game styling are in `src/styles/game-theme.css`; Fredoka and Nunito load from Google Fonts with local system fallbacks. For an entirely self-contained deployment, self-host their appropriately licensed font files and update `index.html`.
 
 The music player uses three **original instrumental WAV loops**, generated without samples or external recordings by `scripts/generate-audio.mjs`. Regenerate them with `node scripts/generate-audio.mjs`. Audio starts only after pressing Play. Play/pause, previous/next, volume, loop playback, route-exit cleanup, and loading/playback errors are implemented with a native HTMLAudioElement. For other legally permitted recordings, extend the bundled catalog or implement signed private Storage URLs. Use official provider embeds for streaming services. Do not extract protected audio. Position synchronization, provider login, uploads, and arbitrary external track URLs are not implemented.
 
@@ -150,7 +152,7 @@ Track titles/order and favorites come from PostgreSQL in shared mode; demo mode 
 
 ## Offline and privacy
 
-The service worker runs only in a production build on HTTPS or localhost. It caches same-origin navigation and static JS/CSS/SVG/PNG/WOFF2 assets; it never caches Supabase API responses, private letters, or audio. Shared state is held in memory only. When a running session goes offline it keeps its last loaded state and rejects shared mutations. A fresh offline reload can show the cached visual shell, but has no persisted shared pet snapshot or letters. It cannot authenticate or fetch new data offline. Demo mode remains browser-local and usable offline after assets have been cached. No offline write queue or reconciliation is attempted.
+The service worker runs only in a production build on HTTPS or localhost. It caches same-origin navigation and static JS/CSS/SVG/PNG/WebP/WOFF2 assets; it never caches Supabase API responses, private letters, or audio. Shared state is held in memory only. When a running session goes offline it keeps its last loaded state and rejects shared mutations. A fresh offline reload can show the cached visual shell, but has no persisted shared pet snapshot or letters. It cannot authenticate or fetch new data offline. Demo mode remains browser-local and usable offline after assets have been cached. No offline write queue or reconciliation is attempted.
 
 ## Validation and known limits
 
@@ -164,7 +166,7 @@ This is an operational MVP. Accessories apply to all pets together, rather than 
 - **Sign-in works but household fails to load:** confirm the profile and membership were provisioned for that exact Auth UUID. Do not relax RLS to work around provisioning errors.
 - **One browser does not update:** check the `activity_events` publication, authenticated subscription, membership policies, and network connectivity. Refresh/reconnect to reload authoritative state.
 - **Assets 404 on Pages:** confirm `VITE_BASE_PATH` matches the repository path, including leading/trailing `/`. Route URLs use `#/...`.
-- **Old offline shell:** reload while online; if necessary unregister the service worker and clear the `little-paws-static-v1` cache. Do not clear demo local storage unless you want to reset it.
+- **Old offline shell:** reload while online; if necessary unregister the service worker and clear the `little-paws-static-v3` cache. Do not clear demo local storage unless you want to reset it.
 - **Tests cannot launch a browser:** run `npx playwright install chromium`; Linux CI uses `--with-deps`. Ensure port 5190 is available.
 - **Full database tests fail to start:** launch Docker Desktop first. Embedded checks still run without Docker.
 - **No music is audible:** press Play first, check device mute/output volume and the in-app slider, and verify `audio/morning.wav` loads under the configured base path. A visible error offers a retry if playback is blocked or the file cannot load.

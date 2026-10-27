@@ -39,7 +39,12 @@ export function MusicRoom({ world, act }: Props) {
         <span className="pill">Original instrumental melodies</span>
       </div>
       <div className="music-layout">
-        <section className="record-scene paper">
+        <section
+          className="record-scene paper"
+          style={{
+            backgroundImage: `linear-gradient(180deg,#f5dff65c,#e3d4f4d9),url(${import.meta.env.BASE_URL}art/cozy-room.webp)`,
+          }}
+        >
           <span className="floating-note">♪</span>
           <span className="floating-note second">♫</span>
           <div className={`vinyl ${playing ? "spinning" : ""}`}>

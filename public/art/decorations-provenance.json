@@ -1,0 +1,36 @@
+{
+  "method": "Built-in image_gen",
+  "description": "Edited clean room base and separate painted decoration assets matching the original cozy-room.webp style and perspective.",
+  "assets": [
+    {
+      "file": "room-base-v2.webp",
+      "reference": "cozy-room.webp",
+      "prompt": "Edit this exact room image. Preserve its exact 1536x1024 landscape composition, viewpoint, dimensions and every detail except TWO removals: remove the large central mint green floral oval floor rug completely, reconstructing uninterrupted wooden floorboards under its full footprint; and remove the pink round pet bed against the right wall below the record cabinet, reconstructing wooden flooring behind it. Keep the little mint pet bed at the back wall, the purple sofa, plants, toys, basket, flowers, pink door, all furniture, original lighting and everything else pixel-aligned as closely as possible. No new furniture, no animals, no text. This will be a fixed game background for separately layered replacement rug and bed art. Do not change camera or crop.",
+      "transparent": false
+    },
+    {
+      "file": "rug-honey.webp",
+      "reference": "cozy-room.webp",
+      "prompt": "Use the attached room image ONLY as visual style and perspective reference. Generate an isolated asset, NOT a room: one luxurious honey golden oval fluffy floral rug, matching the exact hand-painted richly textured dimensional storybook style of the mint floral rug in the reference room. Thick soft golden butter-yellow shag pile, cream scalloped crocheted lace edge and a delicate wreath of tiny cream daisies and blush flowers along the edge. Same camera looking down at about 35 degrees, horizontal ellipse about 2.5 times wider than high, level horizontal major axis, front edge visible. Warm sunshine from upper left, realistic soft fabric thickness, finely painted fibers. Entire rug visible centered with narrow empty margins. GENUINELY TRANSPARENT background, no room, no floor, no other objects, no text, no logos. Keep any grounding shadow very tight to the rug edge. It will be placed directly on the room's wood floor at the center.",
+      "transparent": true
+    },
+    {
+      "file": "rug-rose.webp",
+      "reference": "cozy-room.webp",
+      "prompt": "Use the attached room image ONLY as visual style and perspective reference. Generate an isolated asset, NOT a room: one luxurious dusty rose pink oval fluffy floral rug, matching the exact hand-painted richly textured dimensional storybook style of the mint floral rug in the reference room. Thick soft pastel rose shag pile, cream scalloped crocheted lace edge and a delicate wreath of tiny cream daisies and blush flowers along the edge. Same camera looking down at about 35 degrees, horizontal ellipse about 2.5 times wider than high, level horizontal major axis, front edge visible. Warm sunshine from upper left, realistic soft fabric thickness, finely painted fibers. Entire rug visible centered with narrow empty margins. GENUINELY TRANSPARENT background, no room, no floor, no other objects, no text, no logos. Keep any grounding shadow very tight to the rug edge. It will be placed directly on the room's wood floor at the center.",
+      "transparent": true
+    },
+    {
+      "file": "bed-mint.webp",
+      "reference": "cozy-room.webp",
+      "prompt": "Use the attached room image ONLY as visual style and camera reference. Generate an isolated asset, NOT a room: one small round sage-mint quilted plush pet bed matching the detailed painterly 2.5D style of the PINK pet bed on the right side of the reference image. A low donut-shaped puffy scalloped bolster, soft tufted sage-green fabric, cream inner cushion, small cream daisy cushion and a pale mint/cream gingham pillow. Bed opening faces camera and slightly LEFT, seen from above at same isometric camera as reference. Warm sunlight upper left, soft detailed textile seams and fluffy edges, gentle painterly shading. The entire bed visible, aspect ratio around 1.5 wider than high, no legs. GENUINELY TRANSPARENT background, no floor, no wall, no room, no animal, no other furniture, no text. Narrow transparent margins. Tight soft grounding shadow only immediately underneath.",
+      "transparent": true
+    },
+    {
+      "file": "bed-rose.webp",
+      "reference": "cozy-room.webp",
+      "prompt": "Use the attached room image ONLY as visual style and camera reference. Generate an isolated asset, NOT a room: one small round dusty rose-pink quilted plush pet bed matching the detailed painterly 2.5D style of the PINK pet bed on the right side of the reference image. A low donut-shaped puffy scalloped bolster, soft tufted rose fabric, cream inner cushion, small cream daisy cushion and a pale mint/cream gingham pillow. Bed opening faces camera and slightly LEFT, seen from above at same isometric camera as reference. Warm sunlight upper left, soft detailed textile seams and fluffy edges, gentle painterly shading. The entire bed visible, aspect ratio around 1.5 wider than high, no legs. GENUINELY TRANSPARENT background, no floor, no wall, no room, no animal, no other furniture, no text. Narrow transparent margins. Tight soft grounding shadow only immediately underneath.",
+      "transparent": true
+    }
+  ]
+}

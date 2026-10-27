@@ -38,7 +38,7 @@ export function HomeRoom({
             <Sun size={14} /> A GOOD DAY TO BE TOGETHER
           </span>
           <h1>
-            Home is wherever <span>we are.</span>
+            Our happy little <span>hideaway.</span>
           </h1>
           <p>{world.greeting}</p>
         </div>
