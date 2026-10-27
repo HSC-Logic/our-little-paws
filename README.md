@@ -36,11 +36,14 @@ npm test
 npm run test:db
 npx playwright install chromium
 npm run test:e2e
+npm run test:layout
 npm run build
 npm run preview
 ```
 
 `npm run test:e2e` starts its own server on port 5190. `npm run format` formats application and test code. `scripts/screenshots.mjs` starts its own isolated demo server on port 5195 and captures desktop/mobile previews without using your shared household.
+
+The home uses a side-by-side care panel on wide screens and an always-accessible care tray on smaller screens. The tray includes a pet selector and keeps its actions above phone navigation. `npm run test:layout` checks ten viewport sizes, minimum touch targets, pet switching, feeding, cuddling, and horizontal overflow using intercepted build files; it does not start a listening local server.
 
 ## Demo mode
 

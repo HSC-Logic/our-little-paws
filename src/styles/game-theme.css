@@ -2383,3 +2383,498 @@ select {
 .wall-preview-lavender:after {
   background: #bda2d9;
 }
+/* Keep the room and care controls usable together at every viewport size. */
+.sidebar {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d8bee9 transparent;
+}
+.sidebar nav {
+  flex-shrink: 0;
+}
+.sidebar-note {
+  flex-shrink: 0;
+  padding-top: 24px;
+}
+.home-play-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 22px;
+}
+.home-scene-column {
+  min-width: 0;
+}
+.home-scene-column .illustrated-room {
+  width: min(100%, calc(max(240px, 100dvh - 290px) * 1.5));
+  margin-inline: auto;
+  aspect-ratio: 3/2;
+}
+.home-play-layout > .care-panel {
+  margin: 0;
+  position: sticky;
+  top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 21px 18px 18px;
+  max-height: calc(100dvh - 36px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d8bee9 transparent;
+}
+.home-play-layout .pet-summary {
+  gap: 13px;
+}
+.home-play-layout .mini-pet {
+  width: 70px;
+  height: 70px;
+  border-radius: 19px;
+}
+.home-play-layout .pet-summary h2 {
+  font-size: 27px;
+}
+.home-play-layout .pet-summary p {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.home-play-layout .pet-summary small {
+  font-size: 9px;
+}
+.home-play-layout .needs {
+  gap: 14px 18px;
+  padding: 0;
+}
+.home-play-layout .needs label {
+  font-size: 10px;
+}
+.home-play-layout .care-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding-top: 16px;
+}
+.care-actions-heading {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 1px 4px;
+}
+.care-actions-heading > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #9c7bad;
+  white-space: nowrap;
+}
+.care-actions-heading > label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  white-space: nowrap;
+  color: #9c7bad;
+}
+.care-actions-heading select {
+  width: auto;
+  max-width: 115px;
+  min-height: 36px;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 11px;
+  background: #fffaff;
+}
+.home-play-layout .care-actions button {
+  min-width: 0;
+  min-height: 60px;
+  padding: 9px 3px;
+  font-size: 9px;
+  border-radius: 14px;
+  gap: 6px;
+}
+.home-play-layout .care-actions button svg {
+  width: 19px;
+  height: 19px;
+}
+.home-play-layout .care-actions-heading > span {
+  font-size: 9px;
+}
+.home-play-layout > .adoption-invite {
+  margin-top: 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 19px;
+  gap: 14px;
+}
+.home-play-layout > .adoption-invite .primary {
+  width: 100%;
+  font-size: 11px;
+  margin: 0;
+}
+.home-play-layout > .adoption-invite h2 {
+  font-size: 24px;
+}
+.home-play-layout > .adoption-invite > .pet-art {
+  width: 125px;
+}
+.home-view .scene-topline {
+  min-height: 22px;
+  margin-bottom: 12px;
+}
+.home-view .home-bottom {
+  margin-top: 25px;
+}
+@media (min-width: 1550px) {
+  .home-play-layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 26px;
+  }
+}
+@media (min-width: 1024px) and (max-height: 800px) {
+  .home-view .home-heading {
+    margin-bottom: 18px;
+  }
+  .home-view .home-heading h1 {
+    font-size: 31px;
+  }
+  .home-view .home-heading .eyebrow {
+    margin-bottom: 8px;
+  }
+  .home-scene-column .illustrated-room {
+    width: min(100%, calc(max(220px, 100dvh - 260px) * 1.5));
+  }
+  .home-play-layout > .care-panel {
+    gap: 16px;
+    padding: 17px 15px;
+  }
+  .home-play-layout .mini-pet {
+    width: 59px;
+    height: 59px;
+  }
+  .home-play-layout .pet-summary h2 {
+    font-size: 24px;
+  }
+  .home-play-layout .care-actions {
+    padding-top: 12px;
+    gap: 7px;
+  }
+  .home-play-layout .care-actions button {
+    min-height: 55px;
+    padding: 7px 3px;
+  }
+}
+@media (max-width: 1023px) {
+  .home-play-layout {
+    display: block;
+  }
+  .home-play-layout > .care-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    margin-top: 22px;
+    padding: 21px 18px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .home-play-layout > .adoption-invite {
+    margin-top: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+  .home-play-layout > .adoption-invite .primary {
+    width: auto;
+    margin-inline: auto;
+  }
+  .home-play-layout > .adoption-invite > .pet-art {
+    width: 85px;
+  }
+  .home-view:has(.care-actions) {
+    padding-bottom: 155px;
+  }
+  .home-play-layout .care-actions {
+    position: fixed;
+    left: 216px;
+    right: 18px;
+    bottom: 16px;
+    z-index: 45;
+    margin: 0;
+    padding: 10px 12px 12px;
+    border: 2px solid #e4d0ef;
+    border-bottom-width: 4px;
+    border-radius: 23px;
+    background: #fffafff5;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 7px 30px #78508a26;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .home-play-layout .care-actions button {
+    min-height: 51px;
+    padding: 7px 3px;
+    gap: 5px;
+    font-size: 8px;
+    border-radius: 13px;
+    touch-action: manipulation;
+  }
+  .home-play-layout .care-actions-heading {
+    padding-bottom: 2px;
+  }
+  .home-play-layout .care-actions-heading > span {
+    font-size: 11px;
+  }
+  .home-play-layout .care-actions-heading > label {
+    font-size: 10px;
+  }
+  .home-play-layout .care-actions-heading select {
+    font-size: 12px;
+    max-width: 170px;
+  }
+  .home-scene-column .illustrated-room {
+    width: min(100%, calc(max(200px, 100dvh - 340px) * 1.5));
+    aspect-ratio: 3/2;
+  }
+  .home-view .scene-topline > span:last-child {
+    font-size: 8px;
+  }
+  .app-shell:has(.home-view) .toast {
+    bottom: 151px;
+  }
+  .app-shell:has(.home-view) .more-rooms {
+    bottom: 151px;
+  }
+}
+@media (min-width: 801px) and (max-width: 1023px) {
+  .home-play-layout .care-actions {
+    left: 240px;
+  }
+  .home-play-layout > .care-panel {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .home-play-layout .needs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .app-shell:has(.home-view) .sidebar {
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+  .app-shell:has(.home-view) .topbar {
+    height: 36px;
+  }
+  .app-shell:has(.home-view) .main-content {
+    padding-top: 18px;
+  }
+  .home-view .home-heading .eyebrow {
+    display: none;
+  }
+  .home-view .home-heading {
+    margin-bottom: 17px;
+    gap: 12px;
+  }
+  .home-view .home-heading h1 {
+    font-size: 26px;
+    max-width: 240px;
+  }
+  .home-view .home-heading p {
+    font-size: 10px;
+    margin-top: 7px;
+  }
+  .home-view .scene-topline {
+    margin-bottom: 9px;
+    min-height: 18px;
+  }
+  .home-view .scene-topline > span:last-child {
+    font-size: 6px;
+    max-width: 110px;
+  }
+  .home-view .home-scene-column .illustrated-room {
+    width: min(100%, calc(max(120px, 100dvh - 490px) * 1.5));
+    aspect-ratio: 3/2;
+    border-width: 4px;
+    border-radius: 22px;
+  }
+  .home-play-layout > .care-panel {
+    margin-top: 19px;
+    padding: 20px 17px;
+    gap: 18px;
+    grid-template-columns: 1fr;
+  }
+  .home-play-layout .mini-pet {
+    width: 72px;
+    height: 72px;
+  }
+  .home-play-layout .pet-summary h2 {
+    font-size: 27px;
+  }
+  .home-play-layout .pet-summary p {
+    font-size: 11px;
+  }
+  .home-play-layout .needs label {
+    font-size: 10px;
+  }
+  .home-play-layout .care-actions {
+    left: 11px;
+    right: 11px;
+    bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    padding: 9px 10px 10px;
+    border-radius: 22px;
+  }
+  .home-play-layout .care-actions button {
+    min-height: 48px;
+    padding: 6px 3px;
+    gap: 3px;
+    font-size: 9px;
+    border-radius: 13px;
+    border-bottom-width: 3px;
+  }
+  .home-play-layout .care-actions button svg {
+    width: 18px;
+    height: 18px;
+  }
+  .home-play-layout .care-actions-heading {
+    padding: 0 3px 2px;
+  }
+  .home-play-layout .care-actions-heading > span {
+    font-size: 10px;
+  }
+  .home-play-layout .care-actions-heading > label {
+    font-size: 9px;
+  }
+  .home-play-layout .care-actions-heading select {
+    min-height: 32px;
+    max-width: 125px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  .home-view:has(.care-actions) {
+    padding-bottom: 165px;
+  }
+  .app-shell:has(.home-view) .toast {
+    bottom: calc(262px + env(safe-area-inset-bottom, 0px));
+    font-size: 10px;
+  }
+  .app-shell:has(.home-view) .more-rooms {
+    bottom: calc(262px + env(safe-area-inset-bottom, 0px));
+  }
+  .home-view .room-weather {
+    font-size: 6px;
+    padding: 6px 8px;
+    left: 7px;
+    top: 7px;
+  }
+  .home-view .room-sticker {
+    font-size: 6px;
+    bottom: 7px;
+    right: 7px;
+  }
+  .home-view .room-sticker svg {
+    width: 8px;
+  }
+  .home-view .room-weather svg {
+    width: 9px;
+  }
+  .home-play-layout > .adoption-invite {
+    padding: 20px 17px;
+  }
+  .home-play-layout > .adoption-invite > div {
+    flex: 1;
+  }
+  .home-play-layout > .adoption-invite .primary {
+    width: 100%;
+    font-size: 12px;
+  }
+  .home-view .home-bottom {
+    margin-top: 23px;
+  }
+}
+@media (max-width: 600px) and (max-height: 740px) {
+  .home-view .home-heading h1 {
+    font-size: 23px;
+  }
+  .home-view .home-heading p {
+    display: none;
+  }
+  .home-view .home-heading {
+    margin-bottom: 12px;
+  }
+  .home-view .scene-topline {
+    margin-bottom: 7px;
+  }
+  .home-view .home-scene-column .illustrated-room {
+    width: min(100%, calc(max(110px, 100dvh - 450px) * 1.5));
+  }
+  .home-play-layout .care-actions {
+    gap: 5px;
+    padding-top: 7px;
+    padding-bottom: 8px;
+  }
+  .home-play-layout .care-actions button {
+    min-height: 46px;
+  }
+  .home-play-layout .care-actions-heading select {
+    min-height: 30px;
+  }
+}
+@media (max-width: 370px) {
+  .sidebar:after {
+    display: none;
+  }
+  .home-play-layout .care-actions-heading > span {
+    font-size: 9px;
+  }
+  .home-play-layout .care-actions-heading select {
+    max-width: 105px;
+  }
+  .home-view .home-heading h1 {
+    font-size: 23px;
+  }
+}
+@media (min-width: 601px) and (max-height: 600px) {
+  .home-view .home-heading .eyebrow {
+    display: none;
+  }
+  .home-view .home-heading h1 {
+    font-size: 25px;
+  }
+  .home-view .home-heading p {
+    display: none;
+  }
+  .home-view .home-heading {
+    margin-bottom: 13px;
+  }
+  .home-play-layout .care-actions {
+    gap: 5px;
+    padding-top: 7px;
+  }
+  .home-play-layout .care-actions button {
+    min-height: 46px;
+  }
+  .home-scene-column .illustrated-room {
+    width: min(100%, calc(max(150px, 100dvh - 210px) * 1.5));
+  }
+}
+@media (min-width: 601px) and (max-width: 767px) {
+  .home-play-layout .care-actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .home-view:has(.care-actions) {
+    padding-bottom: 205px;
+  }
+  .app-shell:has(.home-view) .toast {
+    bottom: 205px;
+  }
+}
