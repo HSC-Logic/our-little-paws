@@ -31,16 +31,18 @@ test("a complete little demo journey", async ({ page }) => {
   await expect
     .poll(() =>
       page
-        .locator("audio")
+        .getByLabel("Our little soundtrack", { exact: true })
         .evaluate((audio: HTMLAudioElement) => audio.currentTime),
     )
     .toBeGreaterThan(0);
   await page.getByRole("button", { name: "Next track" }).click();
-  await expect(page.locator("audio")).toHaveAttribute("src", "/audio/rain.wav");
+  await expect(
+    page.getByLabel("Our little soundtrack", { exact: true }),
+  ).toHaveAttribute("src", "/audio/rain.wav");
   await expect
     .poll(() =>
       page
-        .locator("audio")
+        .getByLabel("Our little soundtrack", { exact: true })
         .evaluate(
           (audio: HTMLAudioElement) => !audio.paused && audio.currentTime > 0,
         ),
@@ -49,7 +51,9 @@ test("a complete little demo journey", async ({ page }) => {
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect
     .poll(() =>
-      page.locator("audio").evaluate((audio: HTMLAudioElement) => audio.paused),
+      page
+        .getByLabel("Our little soundtrack", { exact: true })
+        .evaluate((audio: HTMLAudioElement) => audio.paused),
     )
     .toBe(true);
   expect(
