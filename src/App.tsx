@@ -34,6 +34,7 @@ import type { Command } from "./lib/api";
 import { useUI } from "./lib/ui";
 import { PetArt } from "./components/PetArt";
 import { HomeRoom } from "./features/HomeRoom";
+import { BackgroundMusic } from "./components/BackgroundMusic";
 const Adoption = lazy(() =>
   import("./features/Adoption").then((m) => ({ default: m.Adoption })),
 );
@@ -462,6 +463,7 @@ export default function Root() {
       <QueryClientProvider client={client}>
         <HashRouter>
           <RoomScrollReset />
+          <BackgroundMusic />
           <App />
         </HashRouter>
       </QueryClientProvider>

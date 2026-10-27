@@ -2037,3 +2037,11 @@ textarea {
   transform: scaleY(1.3);
   animation: none;
 }
+.background-music {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(6rem + env(safe-area-inset-bottom));
+  z-index: 40;
+  min-height: 44px;
+  box-shadow: 0 3px 12px #0002;
+}
