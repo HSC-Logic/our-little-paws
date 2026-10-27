@@ -2878,3 +2878,285 @@ select {
     bottom: 205px;
   }
 }
+.install-app-card {
+  margin-top: 28px;
+  padding-top: 25px;
+  border-top: 1px dashed #dfc9ed;
+}
+.install-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+.install-card-title h3 {
+  font-size: 22px;
+}
+.install-card-title p {
+  font-size: 11px;
+  margin-top: 5px;
+}
+.install-app-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  background: #ebd9f8;
+  color: #a07bb8;
+  border: 2px solid #f9f0ff;
+}
+.install-app-card > p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 12px 0;
+}
+.install-app-card .install-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #739a7b;
+  font-weight: 800;
+}
+.install-app-card .offline-install-note {
+  color: #91799d;
+  font-size: 11px;
+}
+.pwa-update-inline {
+  margin-top: 17px;
+}
+.pwa-update-notice {
+  position: fixed;
+  z-index: 130;
+  right: 18px;
+  top: max(18px, env(safe-area-inset-top));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 2px solid #dfc6ed;
+  border-radius: 20px;
+  background: #fffbff;
+  box-shadow: 0 10px 35px #88669d2b;
+  color: #9d7ab3;
+  max-width: calc(100vw - 36px);
+}
+.pwa-update-notice strong {
+  font-size: 12px;
+}
+.pwa-update-notice p {
+  font-size: 10px;
+  margin: 4px 0 0;
+}
+.pwa-update-notice .secondary {
+  font-size: 11px;
+  min-height: 40px;
+  padding: 8px 12px;
+}
+.pwa-update-notice > svg {
+  flex-shrink: 0;
+}
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .mobile-nav {
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+  .sidebar {
+    top: max(18px, env(safe-area-inset-top, 0px));
+    bottom: max(18px, env(safe-area-inset-bottom, 0px));
+  }
+}
+@media (max-width: 600px) {
+  .install-card-title h3 {
+    font-size: 20px;
+  }
+  .pwa-update-notice {
+    right: 11px;
+    left: 11px;
+    max-width: none;
+    top: max(11px, env(safe-area-inset-top));
+    padding: 12px;
+    gap: 8px;
+  }
+  .pwa-update-notice strong {
+    font-size: 11px;
+  }
+  .pwa-update-notice p {
+    font-size: 9px;
+  }
+}
+/* A single footer rhythm: centered keepsake, then aligned account rows. */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 28px;
+  flex-shrink: 0;
+}
+.sidebar-footer .sidebar-note {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0 8px 24px;
+  text-align: center;
+}
+.sidebar-footer .sidebar-note > svg {
+  display: block;
+  margin: 0;
+  color: #c58db5;
+  stroke-width: 1.8;
+}
+.sidebar-footer .sidebar-note p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #a07eaf;
+}
+.sidebar-footer .sidebar-note > span {
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: 0.8px;
+  color: #9980aa;
+}
+.sidebar-account-actions {
+  display: grid;
+  gap: 5px;
+  padding-top: 12px;
+  border-top: 1px solid #e5d5ef;
+}
+.account-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 13px;
+  margin: 0;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+  color: #80618e;
+  white-space: nowrap;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+.account-action > svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  stroke-width: 1.8;
+}
+.account-action > span {
+  display: block;
+}
+.account-action:hover {
+  background: #efe3f8;
+  color: #79508f;
+  filter: none;
+}
+.account-action.active {
+  background: #ead8f7;
+  border-color: #d9bde9;
+  color: #80579a;
+}
+.account-signout {
+  color: #7d608b;
+}
+.account-signout:hover {
+  background: #faeaf4;
+  color: #a4638c;
+}
+.mobile-account-actions {
+  border-top: 1px solid #ead9f3;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+.more-rooms .account-action {
+  padding: 11px 6px;
+  font-size: 13px;
+  gap: 12px;
+  border-radius: 12px;
+}
+@media (min-width: 601px) and (max-width: 1150px) {
+  .sidebar-footer {
+    padding-top: 23px;
+  }
+  .sidebar-footer .sidebar-note {
+    padding-inline: 2px;
+    gap: 10px;
+  }
+  .sidebar-footer .sidebar-note p {
+    font-size: 15px;
+  }
+  .sidebar-footer .account-action {
+    padding: 10px 9px;
+    gap: 9px;
+    font-size: 11px;
+  }
+  .sidebar-footer .sidebar-note > span {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+}
+@media (max-width: 600px) {
+  .sidebar-footer {
+    display: none;
+  }
+}
+/* Center the profile mark and independently anchor its decorative heart. */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  line-height: 1;
+  isolation: isolate;
+}
+.avatar-initial {
+  display: block;
+  position: static;
+  line-height: 1;
+}
+.avatar-badge {
+  position: absolute;
+  right: -4px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff9ff;
+  border-radius: 50%;
+  background: #b7cba8;
+  color: #fff;
+  line-height: 0;
+  z-index: 1;
+}
+.avatar-badge > svg {
+  display: block;
+  width: 9px;
+  height: 9px;
+  stroke-width: 2.3;
+}
+@media (max-width: 600px) {
+  .avatar-badge {
+    width: 14px;
+    height: 14px;
+    right: -3px;
+    bottom: -2px;
+  }
+  .avatar-badge > svg {
+    width: 7px;
+    height: 7px;
+  }
+}

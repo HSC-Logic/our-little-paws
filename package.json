@@ -13,7 +13,8 @@
     "preview": "vite preview --host 0.0.0.0",
     "test:db": "node scripts/check-db.mjs",
     "format": "prettier --write src scripts tests *.ts *.json *.js index.html .github README.md",
-    "test:layout": "node scripts/check-layout.mjs"
+    "test:layout": "node scripts/check-layout.mjs",
+    "test:pwa": "node scripts/check-pwa.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.1",
@@ -47,6 +48,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.1",
     "vite": "^8.3.5",
+    "vite-plugin-pwa": "^2.0.0",
     "vitest": "^5.0.5"
   }
 }

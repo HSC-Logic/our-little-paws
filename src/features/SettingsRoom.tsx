@@ -1,3 +1,4 @@
+import { InstallAppCard } from "../components/InstallAppCard";
 import { useForm } from "react-hook-form";
 import { Settings, ArrowRight } from "lucide-react";
 import type { Props } from "./types";
@@ -36,6 +37,7 @@ export function SettingsRoom({ world, act }: Props) {
         </button>
       </form>
       <p>Personal dates and names are yours to add. Nothing is assumed.</p>
+      <InstallAppCard />
     </section>
   );
 }

@@ -300,7 +300,7 @@ textarea:focus-visible {
   font-size: 13px;
   position: relative;
 }
-.avatar span {
+.avatar-badge {
   position: absolute;
   bottom: -4px;
   right: -6px;
@@ -1555,7 +1555,7 @@ textarea {
     height: 27px;
     font-size: 11px;
   }
-  .avatar span {
+  .avatar-badge {
     width: 14px;
     height: 14px;
     font-size: 8px;

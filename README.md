@@ -37,6 +37,7 @@ npm run test:db
 npx playwright install chromium
 npm run test:e2e
 npm run test:layout
+npm run test:pwa
 npm run build
 npm run preview
 ```
@@ -140,7 +141,9 @@ supabase/
 scripts/                   Embedded database checks and screenshot capture
 tests/                     Desktop and mobile Playwright journeys
 public/art/                Original room and pets, optimized WebP, prompt provenance
-public/sw.js               Static assets only; no private API response cache
+public/icons/              Standard and maskable PWA icons
+public/pwa-cleanup.js       Retires only this app’s old static caches
+vite.config.ts             Install manifest and generated Workbox service worker
 docs/screenshots/          Actual application previews
 .github/workflows/         Verification and Pages deployment
 ```
@@ -155,11 +158,28 @@ Track titles/order and favorites come from PostgreSQL in shared mode; demo mode 
 
 ## Offline and privacy
 
-The service worker runs only in a production build on HTTPS or localhost. It caches same-origin navigation and static JS/CSS/SVG/PNG/WebP/WOFF2 assets; it never caches Supabase API responses, private letters, or audio. Shared state is held in memory only. When a running session goes offline it keeps its last loaded state and rejects shared mutations. A fresh offline reload can show the cached visual shell, but has no persisted shared pet snapshot or letters. It cannot authenticate or fetch new data offline. Demo mode remains browser-local and usable offline after assets have been cached. No offline write queue or reconciliation is attempted.
+The production build generates a versioned Workbox service worker and web app manifest with Vite PWA. Relative start/scope URLs support the GitHub Pages repository subpath and a custom-domain root. Icons include 192px, 512px, a padded opaque maskable icon, and an Apple touch icon. The installed app opens in standalone mode.
+
+After the first successful online visit, the worker precaches the shell, all lazy-route chunks, local artwork, and bundled original music (about 4.5 MB total). Only public build files are precached. There is no general API/runtime response cache: Supabase Auth, Realtime, pet records, private letters, and private Storage responses are never persisted by the worker. External Google Fonts require network access and fall back to system fonts offline.
+
+Shared state stays in memory only. A running shared session keeps its last loaded state while offline and rejects shared mutations. A fresh offline launch can reopen the installed shell, but cannot authenticate or fetch shared data. Demo mode supports offline adoption, care, navigation, and bundled music once precaching has finished. It still uses browser-local storage, including demo letters. There is no offline write queue or reconciliation.
+
+New builds download in the background. The app shows an update notice and only reloads after the user chooses **Update** or **Update and reload**. Save edits first. Activating the new worker also removes this app's legacy `little-paws-static-*` caches.
+
+### Install on your device
+
+1. Deploy with the existing GitHub Pages workflow and open the HTTPS URL once online.
+2. In **Our little details**, use **Install Little Paws** when the browser offers installation. Chromium browsers may also show an address-bar install icon or an **Install app** menu item.
+3. On iPhone/iPad, open the URL in Safari and choose **Share → Add to Home Screen**. Enable **Open as Web App** if offered.
+4. Launch **Little Paws** from your home screen or app launcher. Both partners still sign in with their own invited accounts.
+
+PWA registration is disabled during `npm run dev`. For a local installation check, use `npm run build` and `npm run preview`; localhost is a secure-context exception. Installing from one browser does not guarantee installation in another. The app is a web app, not an App Store/Play Store package.
+
+Run `npm run test:pwa` to build a demo under `/our-little-paws/` and check the real generated worker in Chromium: icons/manifest, installability criteria, project scope, offline reopening, lazy-route adoption, offline audio, and exclusion of dynamic/private responses. Its temporary loopback listener always closes. Native OS installation and Safari's manual home-screen flow still need device testing.
 
 ## Validation and known limits
 
-The implementation has passed lint, type checking, production compilation, 17 unit/component tests, 25 embedded PostgreSQL checks, and four desktop/mobile Playwright journeys covering care, mail, music, decorating, games, settings, and offline state. Actual 1440px desktop and 390px mobile renders were inspected. Docker was not running in the implementation environment, so full Supabase pgTAP and live two-account Realtime tests have not been run. Run those after provisioning your project.
+The implementation has passed lint, type checking, production compilation, 22 unit/component tests, 25 embedded PostgreSQL checks, and four desktop/mobile Playwright journeys covering care, mail, music, decorating, games, settings, and offline state. Actual 1440px desktop and 390px mobile renders were inspected. Docker was not running in the implementation environment, so full Supabase pgTAP and live two-account Realtime tests have not been run. Run those after provisioning your project.
 
 This is an operational MVP. Accessories apply to all pets together, rather than per-pet equipment. Pet states persist until another interaction; no background simulation runs. The wrapped surprise message is editable in protected household settings; scheduled birthdays, custom gifts, and pet concerts are future enhancements. Letters share a favorite flag between their participants. Neither irreversible pet loss nor notification pressure is used. Long-lived database action/audit records currently have no scheduled retention job; configure retention as appropriate without deleting idempotency receipts still needed by retrying clients.
 
@@ -169,7 +189,7 @@ This is an operational MVP. Accessories apply to all pets together, rather than 
 - **Sign-in works but household fails to load:** confirm the profile and membership were provisioned for that exact Auth UUID. Do not relax RLS to work around provisioning errors.
 - **One browser does not update:** check the `activity_events` publication, authenticated subscription, membership policies, and network connectivity. Refresh/reconnect to reload authoritative state.
 - **Assets 404 on Pages:** confirm `VITE_BASE_PATH` matches the repository path, including leading/trailing `/`. Route URLs use `#/...`.
-- **Old offline shell:** reload while online; if necessary unregister the service worker and clear the `little-paws-static-v3` cache. Do not clear demo local storage unless you want to reset it.
+- **Old offline shell:** save edits and use the update notice, then reopen online. If necessary, unregister the app’s worker and clear its Workbox cache in browser developer tools. Do not clear demo local storage unless you want to reset it.
 - **Tests cannot launch a browser:** run `npx playwright install chromium`; Linux CI uses `--with-deps`. Ensure port 5190 is available.
 - **Full database tests fail to start:** launch Docker Desktop first. Embedded checks still run without Docker.
 - **No music is audible:** press Play first, check device mute/output volume and the in-app slider, and verify `audio/morning.wav` loads under the configured base path. A visible error offers a retry if playback is blocked or the file cannot load.
@@ -184,6 +204,7 @@ This is an operational MVP. Accessories apply to all pets together, rather than 
 - [ ] Confirm private Storage and Realtime publication/policies.
 - [ ] Run all npm checks and verify desktop, phone, keyboard, reduced-motion, and offline flows.
 - [ ] Configure Pages variables/settings and verify the deployed project base path.
+- [ ] Install on both devices, test a fresh offline launch, and verify the user-controlled update flow.
 - [ ] Verify the bundled original instrumental loops play on both devices; playback positions remain device-local.
 - [ ] Configure backups, account recovery, and appropriate audit-data retention.
 

@@ -289,25 +289,37 @@ function App() {
             </NavLink>
           ))}
         </nav>
-        <div className="sidebar-note">
-          <Heart size={21} />
-          <p>
-            Love grows in the
-            <br />
-            littlest moments.
-          </p>
-          <span>you + me + little paws</span>
+        <div className="sidebar-footer">
+          <div className="sidebar-note">
+            <Heart size={22} aria-hidden="true" />
+            <p>
+              Love grows in the
+              <br />
+              littlest moments.
+            </p>
+            <span>you + me + little paws</span>
+          </div>
+          <div
+            className="sidebar-account-actions"
+            role="group"
+            aria-label="Account"
+          >
+            <NavLink className="account-action" to="/settings">
+              <Settings size={18} aria-hidden="true" />
+              <span>Our little details</span>
+            </NavLink>
+            {supabase && (
+              <button
+                className="account-action account-signout"
+                type="button"
+                onClick={() => void supabase!.auth.signOut()}
+              >
+                <LogOut size={18} aria-hidden="true" />
+                <span>Sign out</span>
+              </button>
+            )}
+          </div>
         </div>
-        <NavLink className="settings-link" to="/settings">
-          <Settings size={18} />
-          Our little details
-        </NavLink>
-        {supabase && (
-          <button onClick={() => void supabase!.auth.signOut()}>
-            <LogOut size={16} />
-            Sign out
-          </button>
-        )}
       </aside>
       <div className="main-shell">
         <header className="topbar">
@@ -320,8 +332,13 @@ function App() {
               {world.treats}
               <small>Love Treats</small>
             </span>
-            <span className="avatar">
-              Y<span>♡</span>
+            <span className="avatar" role="img" aria-label="Your profile">
+              <span className="avatar-initial" aria-hidden="true">
+                Y
+              </span>
+              <span className="avatar-badge" aria-hidden="true">
+                <Heart size={9} />
+              </span>
             </span>
           </div>
         </header>
@@ -406,6 +423,18 @@ function App() {
               {n.label}
             </Link>
           ))}
+          {supabase && (
+            <div className="mobile-account-actions">
+              <button
+                className="account-action account-signout"
+                type="button"
+                onClick={() => void supabase!.auth.signOut()}
+              >
+                <LogOut size={18} aria-hidden="true" />
+                <span>Sign out</span>
+              </button>
+            </div>
+          )}
         </div>
       )}
       {notice && (
