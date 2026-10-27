@@ -106,6 +106,55 @@ export const catalog = [
 ];
 export const tracks = [
   {
+    id: "for-you-october-25",
+    title: "You sang for me - October 25",
+    artist: "Her voice, just for you",
+    mood: "A little love, recorded",
+    color: "#f3dce5",
+  },
+  {
+    id: "for-you-october-11",
+    title: "You sang for me - October 11",
+    artist: "Her voice, just for you",
+    mood: "A memory to play again",
+    color: "#f3dfba",
+  },
+  {
+    id: "for-you-july-30",
+    title: "You sang for me - July 30",
+    artist: "Her voice, just for you",
+    mood: "A little love, recorded",
+    color: "#f3dce5",
+  },
+  {
+    id: "for-you-june-30",
+    title: "You sang for me - June 30",
+    artist: "Her voice, just for you",
+    mood: "A memory to play again",
+    color: "#f3dfba",
+  },
+  {
+    id: "for-you-june-3",
+    title: "You sang for me - June 3",
+    artist: "Her voice, just for you",
+    mood: "A little love, recorded",
+    color: "#dce5df",
+  },
+  {
+    id: "for-you-may-31",
+    title: "You sang for me - May 31",
+    artist: "Her voice, just for you",
+    mood: "A memory to play again",
+    color: "#e6def2",
+  },
+  {
+    id: "for-you-may-30",
+    title: "You sang for me - May 30",
+    artist: "Her voice, just for you",
+    mood: "A little love, recorded",
+    color: "#f3dce5",
+  },
+  {
     id: "morning",
     title: "A soft little morning",
     artist: "The windowsill sessions",

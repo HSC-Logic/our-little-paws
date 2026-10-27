@@ -6,7 +6,11 @@ export function useMusicPlayer(trackId: string) {
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.4);
   const [error, setError] = useState("");
-  const source = `${import.meta.env.BASE_URL}audio/${tracks.some((t) => t.id === trackId) ? trackId : "morning"}.wav`;
+  const selectedId = tracks.some((track) => track.id === trackId)
+    ? trackId
+    : "morning";
+  const extension = selectedId.startsWith("for-you-") ? "opus" : "wav";
+  const source = `${import.meta.env.BASE_URL}audio/${selectedId}.${extension}`;
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;

@@ -18,6 +18,47 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("little rooms", () => {
+  it.each([
+    "for-you-october-25",
+    "for-you-october-11",
+    "for-you-july-30",
+    "for-you-june-30",
+    "for-you-june-3",
+    "for-you-may-31",
+    "for-you-may-30",
+  ])("loads personal recording %s with a saved playlist", (song) => {
+    render(
+      <MusicRoom
+        world={{
+          ...initialWorld(),
+          song,
+          songs: [
+            {
+              id: "morning",
+              title: "Morning",
+              artist: "Home",
+              mood: "Cozy",
+              color: "#f3dfba",
+            },
+          ],
+        }}
+        act={vi.fn()}
+      />,
+    );
+    expect(
+      (screen.getByLabelText("Our little soundtrack") as HTMLAudioElement).src,
+    ).toContain(`/audio/${song}.opus`);
+    expect(
+      screen.getByRole("button", {
+        name: "Favorite You sang for me - October 25",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: "Favorite You sang for me - October 11",
+      }),
+    ).toBeInTheDocument();
+  });
   it("has four accessible adoption controls", () => {
     render(<Adoption world={initialWorld()} act={vi.fn()} />);
     expect(

@@ -17,6 +17,7 @@ export default defineConfig({
         "icons/*.png",
         "art/*.webp",
         "audio/*.wav",
+        "audio/*.opus",
       ],
       manifest: {
         id: "./",
@@ -65,7 +66,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{html,js,css,svg,png,webp,wav,woff2,webmanifest}"],
+        globPatterns: [
+          "**/*.{html,js,css,svg,png,webp,wav,opus,woff2,webmanifest}",
+        ],
         cleanupOutdatedCaches: true,
         skipWaiting: false,
         clientsClaim: true,

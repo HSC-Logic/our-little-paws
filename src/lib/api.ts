@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import { care, initialWorld, species, catalog } from "./model";
+import { care, initialWorld, species, catalog, tracks } from "./model";
 import type { World, Action, Species } from "./model";
 const url = import.meta.env.VITE_SUPABASE_URL,
   key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
@@ -120,7 +120,10 @@ export async function command(
     message = "A little more cozy.";
     if (!w.achievements.includes("Cozy Home")) w.achievements.push("Cozy Home");
   } else if (input.kind === "favorite-song") {
-    const song = z.enum(["morning", "rain", "moon"]).parse(input.song);
+    const song = z
+      .string()
+      .refine((id) => tracks.some((track) => track.id === id))
+      .parse(input.song);
     w.favoriteSongs = w.favoriteSongs || [];
     w.favoriteSongs = w.favoriteSongs.includes(song)
       ? w.favoriteSongs.filter((s) => s !== song)

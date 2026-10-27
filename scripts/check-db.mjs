@@ -25,6 +25,18 @@ const a = "00000000-0000-4000-8000-000000000001",
 await db.exec(
   `insert into auth.users values('${a}','a'),('${b}','b'),('${c}','c');insert into public.profiles(id,display_name)values('${a}','A'),('${b}','B'),('${c}','C');insert into public.households(id)values('${h}'),('${h2}');insert into public.household_members(household_id,user_id)values('${h}','${a}'),('${h}','${b}'),('${h2}','${c}');insert into public.letters(household_id,sender,recipient,subject,body,envelope)values('${h}','${a}','${a}','private','a note','rose');`,
 );
+await db.exec(
+  fs.readFileSync(
+    "supabase/migrations/202610270002_personal_songs.sql",
+    "utf8",
+  ),
+);
+await db.exec(
+  fs.readFileSync(
+    "supabase/migrations/202610270003_more_personal_songs.sql",
+    "utf8",
+  ),
+);
 let passed = 0;
 function check(ok, message) {
   if (!ok) throw Error(message);
@@ -127,6 +139,20 @@ check(
   w.favoriteSongs.includes("morning") && w.songs[0].title === "Morning",
   "Shared music metadata and favorites",
 );
+for (const song of [
+  "for-you-october-25",
+  "for-you-october-11",
+  "for-you-july-30",
+  "for-you-june-30",
+  "for-you-june-3",
+  "for-you-may-31",
+  "for-you-may-30",
+]) {
+  w = await action({ kind: "song", song });
+  check(w.song === song, "Select personal recording " + song);
+  w = await action({ kind: "favorite-song", song });
+  check(w.favoriteSongs.includes(song), "Favorite personal recording " + song);
+}
 for (let i = 1; i < 10; i++) {
   await db.exec(
     `reset role;update public.action_receipts set created_at=now()-interval '2 minutes' where household_id='${h}' and kind='game';`,
@@ -172,7 +198,7 @@ check(
 );
 check(
   (await db.query("select * from public.songs where household_id=$1", [h])).rows
-    .length === 3,
+    .length === 10,
   "Provisioning reruns preserve ordered songs",
 );
 const d = "00000000-0000-4000-8000-000000000004",

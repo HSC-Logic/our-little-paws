@@ -14,7 +14,14 @@ import { tracks } from "../lib/model";
 import type { Props } from "./types";
 export function MusicRoom({ world, act }: Props) {
   const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const songs = world.songs?.length ? world.songs : tracks;
+  const songs = world.songs?.length
+    ? [
+        ...world.songs,
+        ...tracks.filter(
+          (track) => !world.songs!.some((song) => song.id === track.id),
+        ),
+      ]
+    : tracks;
   const index = songs.findIndex((t) => t.id === world.song);
   const track = songs[index < 0 ? 0 : index];
   const player = useMusicPlayer(track.id);
@@ -36,7 +43,7 @@ export function MusicRoom({ world, act }: Props) {
           <h2>A little melody, a lot of love</h2>
           <p>Some moments sound better together.</p>
         </div>
-        <span className="pill">Original instrumental melodies</span>
+        <span className="pill">Her voice & our little melodies</span>
       </div>
       <div className="music-layout">
         <section
@@ -117,7 +124,7 @@ export function MusicRoom({ world, act }: Props) {
             />
           </label>
           <small>
-            Original instrumental loops, made for this little world. Track
+            Songs she sang for you and our original instrumental loops. Track
             choice is shared; playback and volume stay on this device.
           </small>
           {player.error && <p role="alert">{player.error}</p>}
