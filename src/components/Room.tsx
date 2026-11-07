@@ -34,21 +34,16 @@ export function Room({
       <div className="room-scene">
         <img
           className="room-art"
-          src={`${import.meta.env.BASE_URL}art/room-base-v2.webp`}
-          alt="A colorful isometric dollhouse with lavender walls, a sunny window, fairy lights, a sofa, a record player, and soft pet beds"
+          src={`${import.meta.env.BASE_URL}art/${wall === "christmas-wall" ? "room-christmas.webp" : "room-base-v2.webp"}`}
+          alt={
+            wall === "christmas-wall"
+              ? "A painted Christmas dollhouse with warm red walls, golden lights and trim, a sunny window, and soft pet beds"
+              : "A colorful isometric dollhouse with lavender walls, a sunny window, fairy lights, a sofa, a record player, and soft pet beds"
+          }
           fetchPriority="high"
           draggable={false}
         />
         <div className="room-wall-tint" aria-hidden="true" />
-        {wall === "christmas-wall" && (
-          <div className="room-christmas" aria-hidden="true">
-            <DecorationArt
-              item={wall}
-              slot="wall"
-              label="Christmas tree and gifts"
-            />
-          </div>
-        )}
         <div className="room-rug" aria-hidden="true">
           <DecorationArt item={rug} slot="rug" label="Selected rug" />
         </div>

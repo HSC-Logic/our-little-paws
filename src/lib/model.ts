@@ -142,7 +142,7 @@ export const catalog = [
   {
     id: "christmas-wall",
     slot: "wall",
-    name: "Christmas tree & golden lights",
+    name: "Christmas red & gold wall",
     cost: 15,
   },
   { id: "christmas-rug", slot: "rug", name: "Red & gold star rug", cost: 10 },

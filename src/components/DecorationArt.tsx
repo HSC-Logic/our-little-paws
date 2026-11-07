@@ -8,6 +8,20 @@ export function DecorationArt({
   slot: string;
   label: string;
 }) {
+  if (item === "christmas-wall")
+    return (
+      <span
+        role="img"
+        aria-label={label}
+        className="decoration-art decoration-art-wall"
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}art/room-christmas.webp`}
+          alt=""
+          draggable={false}
+        />
+      </span>
+    );
   if (item.startsWith("christmas-"))
     return (
       <span
