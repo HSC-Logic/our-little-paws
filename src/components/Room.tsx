@@ -61,7 +61,7 @@ export function Room({
           {pets.map((p, i) => (
             <button
               key={p.id}
-              className={`room-pet pet-species-${p.species} pet-position-${i} ${p.id === selected ? "selected" : ""}`}
+              className={`room-pet pet-species-${p.species.split("-")[0]} pet-position-${i} ${p.id === selected ? "selected" : ""}`}
               onClick={() => onSelect(p.id)}
               aria-label={`Select ${p.name}`}
               aria-pressed={p.id === selected}

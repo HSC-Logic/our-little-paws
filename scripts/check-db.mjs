@@ -47,6 +47,9 @@ await db.exec(
     "utf8",
   ),
 );
+await db.exec(
+  fs.readFileSync("supabase/migrations/202611070003_more_friends.sql", "utf8"),
+);
 function check(ok, message) {
   if (!ok) throw Error(message);
   console.log("PASS " + message);
@@ -236,6 +239,29 @@ await as(d);
 check(
   (await world()).members.length === 2,
   "Provisioning can add the second partner later",
+);
+for (const [species, name] of [
+  ["puppy-biscuit", "Biscuit"],
+  ["kitten-willow", "Willow"],
+  ["bunny-rosie", "Rosie"],
+  ["hamster-maple", "Maple"],
+  ["kitten-misty", "Misty"],
+]) {
+  const adopted = await action({ kind: "adopt", species });
+  check(
+    adopted.pets.some(
+      (friend) => friend.species === species && friend.name === name,
+    ),
+    `${name} adoption`,
+  );
+  await denied(
+    () => action({ kind: "adopt", species }),
+    `${name} duplicate denied`,
+  );
+}
+await denied(
+  () => action({ kind: "adopt", species: "unknown" }),
+  "Unknown friend denied",
 );
 console.log(
   `${passed} database checks passed. Embedded PostgreSQL does not cover Supabase Realtime or Storage runtime.`,

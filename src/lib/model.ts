@@ -1,4 +1,13 @@
-export type Species = "puppy" | "kitten" | "bunny" | "hamster";
+export type Species =
+  | "puppy"
+  | "kitten"
+  | "bunny"
+  | "hamster"
+  | "puppy-biscuit"
+  | "kitten-willow"
+  | "bunny-rosie"
+  | "hamster-maple"
+  | "kitten-misty";
 export type Action =
   | "feed"
   | "treat"
@@ -92,6 +101,41 @@ export const species: {
     trait: "Small paws, big adventures",
     likes: "Treats, tunnels & playful music",
     color: "#e7b471",
+  },
+  {
+    key: "puppy-biscuit",
+    name: "Biscuit",
+    trait: "Your warmhearted little shadow",
+    likes: "Garden walks, blankets & belly rubs",
+    color: "#caa780",
+  },
+  {
+    key: "kitten-willow",
+    name: "Willow",
+    trait: "A quiet little daydreamer",
+    likes: "Sunbeams, soft pillows & gentle jazz",
+    color: "#c8baa5",
+  },
+  {
+    key: "bunny-rosie",
+    name: "Rosie",
+    trait: "Tiny hops, endless sweetness",
+    likes: "Clover, cozy naps & flower gardens",
+    color: "#e9c4bc",
+  },
+  {
+    key: "hamster-maple",
+    name: "Maple",
+    trait: "A pocket-sized bundle of joy",
+    likes: "Seeds, hideaways & evening adventures",
+    color: "#d49b67",
+  },
+  {
+    key: "kitten-misty",
+    name: "Misty",
+    trait: "Soft paws and a curious heart",
+    likes: "Rainy windows, yarn & sleepy cuddles",
+    color: "#b1c6cd",
   },
 ];
 export const catalog = [

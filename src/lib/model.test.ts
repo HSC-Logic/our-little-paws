@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { care, initialWorld } from "./model";
+import { care, initialWorld, species } from "./model";
 import type { Pet } from "./model";
 import { command, getWorld } from "./api";
 const pet: Pet = {
@@ -32,6 +32,18 @@ describe("gentle care rules", () => {
 });
 describe("demo persistence", () => {
   beforeEach(() => localStorage.clear());
+  it("adopts all nine distinct friends and rejects duplicates", async () => {
+    expect(species).toHaveLength(9);
+    for (const friend of species) {
+      await command({ kind: "adopt", species: friend.key });
+      await expect(
+        command({ kind: "adopt", species: friend.key }),
+      ).rejects.toThrow("already");
+    }
+    expect((await getWorld()).pets.map((friend) => friend.name)).toEqual(
+      species.map((friend) => friend.name),
+    );
+  });
   it("starts without invented private letters", () =>
     expect(initialWorld().letters).toEqual([]));
   it("adopts and persists one pet per species", async () => {

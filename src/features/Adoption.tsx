@@ -9,7 +9,7 @@ export function Adoption({ world, act }: Props) {
         <div>
           <span className="eyebrow">ROOM FOR A LITTLE MORE LOVE</span>
           <h2>Meet your forever friends</h2>
-          <p>Four little personalities. One very happy home.</p>
+          <p>Nine little personalities. One very happy home.</p>
         </div>
       </div>
       <div className="adoption-grid">
@@ -22,7 +22,7 @@ export function Adoption({ world, act }: Props) {
               <PetArt species={s.key} />
             </div>
             <h3>{s.name}</h3>
-            <span className="pill">{s.key}</span>
+            <span className="pill">{s.key.split("-")[0]}</span>
             <p>{s.trait}</p>
             <small>{s.likes}</small>
             <button

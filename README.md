@@ -8,7 +8,7 @@
 
 ## What works
 
-- Animated welcome and four original illustrated pets: Mochi the puppy, Luna the kitten, Coco the bunny, and Peanut the hamster. Adopt, select, rename, and care for each pet.
+- Animated welcome and nine adoptable friends: Mochi, Luna, Coco, Peanut, Biscuit, Willow, Rosie, Maple, and Misty. The five new friends reuse the four original storybook illustrations with different coat tints. Adopt, select, rename, and care for each pet.
 - Feed, treat, cuddle, head pats, play, groom, sleep/wake, and dance; bounded needs, cooldowns, adoption age, animation feedback, and activity history.
 - A responsive illustrated home; wallpapers, rugs, beds, and shared accessories purchased using non-purchasable Love Treats.
 - Music room with three original synthesized instrumental loops, playlist selection, favorites, volume/play controls, and dancing animals. Shared mode shares track selection and favorites. Playback controls remain device-local.
@@ -27,7 +27,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL printed by Vite (normally `http://localhost:5173`). Choose **Enter Our Little World**, then adopt your first friend. The home starts empty intentionally; all four pets can be adopted for free.
+Open the URL printed by Vite (normally `http://localhost:5173`). Choose **Enter Our Little World**, then adopt your first friend. The home starts empty intentionally; all nine friends can be adopted for free.
 
 ```sh
 npm run lint

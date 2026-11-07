@@ -13,12 +13,12 @@ export function PetArt({
   return (
     <span
       role="img"
-      aria-label={`${species} ${activity}`}
-      className={`pet-art illustrated-pet ${activity} ${className}`}
+      aria-label={`${species.split("-").join(" ")} ${activity}`}
+      className={`pet-art illustrated-pet coat-${species} ${activity} ${className}`}
     >
       <img
         className="pet-illustration"
-        src={`${import.meta.env.BASE_URL}art/${species}.webp`}
+        src={`${import.meta.env.BASE_URL}art/${species.split("-")[0]}.webp`}
         alt=""
         draggable={false}
       />
