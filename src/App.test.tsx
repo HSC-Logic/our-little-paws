@@ -18,6 +18,32 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 describe("little rooms", () => {
+  it("shows playback time, seeks, and resets when the track changes", () => {
+    const world = initialWorld();
+    const { rerender } = render(<MusicRoom world={world} act={vi.fn()} />);
+    const audio = screen.getByLabelText(
+      "Our little soundtrack",
+    ) as HTMLAudioElement;
+    expect(screen.getByLabelText("Track duration")).toHaveTextContent("--:--");
+    expect(screen.getByLabelText("Playback position")).toBeDisabled();
+    Object.defineProperty(audio, "duration", {
+      configurable: true,
+      value: 125,
+    });
+    fireEvent.loadedMetadata(audio);
+    audio.currentTime = 34;
+    fireEvent.timeUpdate(audio);
+    expect(screen.getByLabelText("Elapsed time")).toHaveTextContent("0:34");
+    expect(screen.getByLabelText("Track duration")).toHaveTextContent("2:05");
+    fireEvent.change(screen.getByLabelText("Playback position"), {
+      target: { value: "60" },
+    });
+    expect(audio.currentTime).toBe(60);
+    expect(screen.getByLabelText("Elapsed time")).toHaveTextContent("1:00");
+    rerender(<MusicRoom world={{ ...world, song: "rain" }} act={vi.fn()} />);
+    expect(screen.getByLabelText("Elapsed time")).toHaveTextContent("0:00");
+    expect(screen.getByLabelText("Playback position")).toBeDisabled();
+  });
   it.each([
     "for-you-november-6",
     "for-you-october-25",

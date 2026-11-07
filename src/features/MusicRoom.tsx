@@ -12,6 +12,10 @@ import {
 import { PetArt } from "../components/PetArt";
 import { tracks } from "../lib/model";
 import type { Props } from "./types";
+function formatTime(seconds: number) {
+  const wholeSeconds = Math.floor(seconds);
+  return `${Math.floor(wholeSeconds / 60)}:${String(wholeSeconds % 60).padStart(2, "0")}`;
+}
 export function MusicRoom({ world, act }: Props) {
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const songs = world.songs?.length
@@ -31,7 +35,10 @@ export function MusicRoom({ world, act }: Props) {
       <audio
         ref={player.audioRef}
         loop
-        preload="none"
+        preload="metadata"
+        onTimeUpdate={player.onTimeUpdate}
+        onLoadedMetadata={player.onDurationChange}
+        onDurationChange={player.onDurationChange}
         onPlay={player.onPlay}
         onPause={player.onPause}
         onError={player.onError}
@@ -79,6 +86,27 @@ export function MusicRoom({ world, act }: Props) {
             {Array.from({ length: 35 }, (_, i) => (
               <i key={i} style={{ height: 12 + ((i * 17) % 41) }} />
             ))}
+          </div>
+          <div className="playback-progress">
+            <input
+              aria-label="Playback position"
+              aria-valuetext={`${formatTime(player.currentTime)} of ${formatTime(player.duration)}`}
+              type="range"
+              min="0"
+              max={player.duration || 0}
+              step="0.1"
+              value={player.currentTime}
+              disabled={!player.duration}
+              onChange={(event) => player.seek(Number(event.target.value))}
+            />
+            <div className="playback-times">
+              <span aria-label="Elapsed time">
+                {formatTime(player.currentTime)}
+              </span>
+              <span aria-label="Track duration">
+                {player.duration ? formatTime(player.duration) : "--:--"}
+              </span>
+            </div>
           </div>
           <div className="player-controls">
             <button

@@ -6,6 +6,8 @@ export function useMusicPlayer(trackId: string) {
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.4);
   const [error, setError] = useState("");
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const selectedId = tracks.some((track) => track.id === trackId)
     ? trackId
     : "morning";
@@ -16,6 +18,8 @@ export function useMusicPlayer(trackId: string) {
     if (!audio) return;
     let active = true;
     setError("");
+    setCurrentTime(0);
+    setDuration(0);
     audio.src = source;
     audio.load();
     if (wantsPlayback.current)
@@ -61,6 +65,20 @@ export function useMusicPlayer(trackId: string) {
     setVolume,
     error,
     toggle,
+    currentTime,
+    duration,
+    onTimeUpdate: () => setCurrentTime(audioRef.current?.currentTime || 0),
+    onDurationChange: () => {
+      const seconds = audioRef.current?.duration;
+      setDuration(seconds && Number.isFinite(seconds) ? seconds : 0);
+    },
+    seek: (seconds: number) => {
+      if (!audioRef.current || !Number.isFinite(seconds) || duration <= 0)
+        return;
+      const position = Math.max(0, Math.min(seconds, duration));
+      audioRef.current.currentTime = position;
+      setCurrentTime(position);
+    },
     onPlay: () => setPlaying(true),
     onPause: () => setPlaying(false),
     onError: () => {
