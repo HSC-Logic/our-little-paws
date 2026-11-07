@@ -86,11 +86,11 @@ describe("little rooms", () => {
       }),
     ).toBeInTheDocument();
   });
-  it("has four accessible adoption controls", () => {
+  it("has nine accessible adoption controls", () => {
     render(<Adoption world={initialWorld()} act={vi.fn()} />);
     expect(
       screen.getAllByRole("button", { name: /Bring me home/ }),
-    ).toHaveLength(4);
+    ).toHaveLength(9);
   });
   it("plays only after a gesture, adjusts volume, pauses, and cleans up", async () => {
     const { unmount } = render(
