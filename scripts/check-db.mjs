@@ -37,6 +37,9 @@ await db.exec(
     "utf8",
   ),
 );
+await db.exec(
+  fs.readFileSync("supabase/migrations/202611070001_november_song.sql", "utf8"),
+);
 let passed = 0;
 function check(ok, message) {
   if (!ok) throw Error(message);
@@ -147,6 +150,7 @@ for (const song of [
   "for-you-june-3",
   "for-you-may-31",
   "for-you-may-30",
+  "for-you-november-6",
 ]) {
   w = await action({ kind: "song", song });
   check(w.song === song, "Select personal recording " + song);
@@ -198,7 +202,7 @@ check(
 );
 check(
   (await db.query("select * from public.songs where household_id=$1", [h])).rows
-    .length === 10,
+    .length === 11,
   "Provisioning reruns preserve ordered songs",
 );
 const d = "00000000-0000-4000-8000-000000000004",

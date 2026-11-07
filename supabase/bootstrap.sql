@@ -57,7 +57,8 @@ begin
       ('for-you-june-30','You sang for me - June 30',6),
       ('for-you-june-3','You sang for me - June 3',7),
       ('for-you-may-31','You sang for me - May 31',8),
-      ('for-you-may-30','You sang for me - May 30',9)
+      ('for-you-may-30','You sang for me - May 30',9),
+      ('for-you-november-6','You sang for me - November 6',10)
     ) as t(key,title,position)
     on conflict(household_id,track_key) do nothing;
   raise notice 'Household ready. Return to the app and choose Try again.';

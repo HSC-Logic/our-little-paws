@@ -6,4 +6,6 @@ These three instrumental WAV loops are original procedural compositions created 
 
 Additional unchanged personal recordings: `for-you-july-30.opus`, `for-you-june-30.opus`, `for-you-june-3.opus`, `for-you-may-31.opus`, and `for-you-may-30.opus`, from the corresponding WhatsApp audio files dated in 2026. The same personal-recording access considerations apply.
 
+`for-you-november-6.opus` is the unchanged personal recording from the WhatsApp audio file dated November 6, 2026. The same personal-recording access considerations apply.
+
 Regenerate with `node scripts/generate-audio.mjs`. Playback begins after a Play gesture and remains local to each device. Shared track selection does not synchronize playback position.

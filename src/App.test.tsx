@@ -19,6 +19,7 @@ afterEach(() => {
 });
 describe("little rooms", () => {
   it.each([
+    "for-you-november-6",
     "for-you-october-25",
     "for-you-october-11",
     "for-you-july-30",

@@ -106,6 +106,13 @@ export const catalog = [
 ];
 export const tracks = [
   {
+    id: "for-you-november-6",
+    title: "You sang for me - November 6",
+    artist: "Her voice, just for you",
+    mood: "A little love, recorded",
+    color: "#f3dce5",
+  },
+  {
     id: "for-you-october-25",
     title: "You sang for me - October 25",
     artist: "Her voice, just for you",
