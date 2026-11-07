@@ -41,6 +41,12 @@ await db.exec(
   fs.readFileSync("supabase/migrations/202611070001_november_song.sql", "utf8"),
 );
 let passed = 0;
+await db.exec(
+  fs.readFileSync(
+    "supabase/migrations/202611070002_christmas_collection.sql",
+    "utf8",
+  ),
+);
 function check(ok, message) {
   if (!ok) throw Error(message);
   console.log("PASS " + message);

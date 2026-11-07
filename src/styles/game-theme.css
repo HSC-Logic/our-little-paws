@@ -3160,3 +3160,76 @@ select {
     height: 7px;
   }
 }
+
+.christmas-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #d5ac50;
+  border-radius: 24px;
+  color: #fff1d0;
+  background:
+    radial-gradient(ellipse at top right, #d5ac5040, transparent 65%),
+    linear-gradient(120deg, #731e2c, #a42c37);
+}
+.christmas-banner .eyebrow,
+.christmas-banner p,
+.christmas-banner small {
+  color: #ffe4a6;
+}
+.christmas-banner h3 {
+  margin: 6px 0;
+  color: #fff1d0;
+}
+.christmas-banner p {
+  margin: 0 0 8px;
+}
+.christmas-banner > svg {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+}
+.christmas-decoration {
+  border: 1px solid #d5ac50;
+}
+.christmas-decoration .swatch {
+  background: radial-gradient(ellipse, #fff0cb, #f2d9a9);
+}
+.christmas-label {
+  display: block;
+  color: #922431;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+.christmas-decoration .secondary {
+  color: #85212e;
+  border-color: #c69a3d;
+  background: #fff0ce;
+}
+.christmas-decoration .secondary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.christmas-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.wall-christmas-wall .room-wall-tint {
+  background: #a12430;
+}
+.room-christmas {
+  position: absolute;
+  left: 60%;
+  top: 19%;
+  width: 30%;
+  height: 43%;
+  pointer-events: none;
+}
+.room-christmas .decoration-art {
+  width: 100%;
+  height: 100%;
+}

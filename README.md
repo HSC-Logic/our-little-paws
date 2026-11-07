@@ -56,7 +56,7 @@ Demo rules are illustrative and browser-editable. Production rewards and permiss
 
 1. Create a Supabase project. In **Authentication → Providers → Email**, disable new user signups. Also disable anonymous sign-in. Public account or household creation is deliberately absent from this app.
 2. In **Authentication → URL Configuration**, set your production site URL. With the email/password sign-in flow used here, invite users and establish their passwords through Supabase's trusted admin flow before they sign in. Configure and test your project's invitation/password setup process; this app has no public signup or password-reset screen.
-3. Apply `supabase/migrations/202610270001_world.sql` once in the SQL editor as project owner. Alternatively use the Supabase CLI:
+3. Apply all files in `supabase/migrations/` in filename order once in the SQL editor as project owner. Alternatively use the Supabase CLI:
 
    ```sh
    supabase login

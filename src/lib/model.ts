@@ -95,6 +95,15 @@ export const species: {
   },
 ];
 export const catalog = [
+  {
+    id: "christmas-wall",
+    slot: "wall",
+    name: "Christmas tree & golden lights",
+    cost: 15,
+  },
+  { id: "christmas-rug", slot: "rug", name: "Red & gold star rug", cost: 10 },
+  { id: "christmas-bed", slot: "bed", name: "Christmas gift bed", cost: 12 },
+  { id: "christmas-hat", slot: "accessory", name: "Little Santa hat", cost: 8 },
   { id: "sage", slot: "wall", name: "Sage daydream", cost: 15 },
   { id: "lavender", slot: "wall", name: "Lavender skies", cost: 15 },
   { id: "honey", slot: "rug", name: "Honey blossom rug", cost: 10 },
@@ -104,6 +113,21 @@ export const catalog = [
   { id: "mint-bed", slot: "bed", name: "Mint cloud bed", cost: 12 },
   { id: "rose-bed", slot: "bed", name: "Rose cloud bed", cost: 12 },
 ];
+export const christmasEndsAt = Date.parse("2027-01-01T00:00:00+05:30");
+export function christmasExpired(now = Date.now()) {
+  return now >= christmasEndsAt;
+}
+export function availableRoom(room: World["room"], now = Date.now()) {
+  if (!christmasExpired(now)) return room;
+  return Object.fromEntries(
+    Object.entries(room).map(([slot, item]) => [
+      slot,
+      item?.startsWith("christmas-")
+        ? ({ wall: "cream", rug: "rose", bed: "", accessory: "" }[slot] ?? "")
+        : item,
+    ]),
+  );
+}
 export const tracks = [
   {
     id: "for-you-november-6",

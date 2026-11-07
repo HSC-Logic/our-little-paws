@@ -1,7 +1,8 @@
 import { Heart, Music, Sparkles, Sun } from "lucide-react";
 import { DecorationArt } from "./DecorationArt";
 import { PetArt } from "./PetArt";
-import type { Pet } from "../lib/model";
+import { availableRoom, type Pet } from "../lib/model";
+import { useEffect, useState } from "react";
 export function Room({
   pets,
   selected,
@@ -19,6 +20,15 @@ export function Room({
   accessory: string;
   bed: string;
 }) {
+  const [now, setNow] = useState(Date.now);
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+  ({ wall, rug, accessory, bed } = availableRoom(
+    { wall, rug, accessory, bed },
+    now,
+  ));
   return (
     <div className={`room illustrated-room wall-${wall} rug-${rug} bed-${bed}`}>
       <div className="room-scene">
@@ -29,7 +39,16 @@ export function Room({
           fetchPriority="high"
           draggable={false}
         />
-        <div className="room-wall-tint" aria-hidden="true"/>
+        <div className="room-wall-tint" aria-hidden="true" />
+        {wall === "christmas-wall" && (
+          <div className="room-christmas" aria-hidden="true">
+            <DecorationArt
+              item={wall}
+              slot="wall"
+              label="Christmas tree and gifts"
+            />
+          </div>
+        )}
         <div className="room-rug" aria-hidden="true">
           <DecorationArt item={rug} slot="rug" label="Selected rug" />
         </div>

@@ -1,9 +1,18 @@
-import { Heart } from "lucide-react";
+import { Heart, Lock, Gift } from "lucide-react";
+import { useEffect, useState } from "react";
 import { DecorationArt } from "../components/DecorationArt";
 import { PetArt } from "../components/PetArt";
-import { catalog } from "../lib/model";
+import { catalog, christmasExpired } from "../lib/model";
 import type { Props } from "./types";
 export function Decorate({ world, act }: Props) {
+  const [expired, setExpired] = useState(christmasExpired);
+  useEffect(() => {
+    const timer = window.setInterval(
+      () => setExpired(christmasExpired()),
+      1000,
+    );
+    return () => window.clearInterval(timer);
+  }, []);
   return (
     <>
       <div className="section-heading">
@@ -16,34 +25,69 @@ export function Decorate({ world, act }: Props) {
           <Heart size={15} /> {world.treats} Love Treats
         </span>
       </div>
+      <div className="christmas-banner">
+        <Gift aria-hidden="true" />
+        <div>
+          <span className="eyebrow">RED, GOLD & LITTLE PAWS</span>
+          <h3>A very cozy Christmas</h3>
+          <p>
+            {expired
+              ? "Season ended. Christmas keepsakes are locked."
+              : "A tree, golden stars, wrapped gifts and a little Santa magic."}
+          </p>
+          <small>
+            Available through December 31, 2026 (Sri Lanka time). Then locked,
+            including owned items.
+          </small>
+        </div>
+      </div>
       <div className="decoration-grid">
-        {catalog.map((item) => (
-          <article className="paper decoration" key={item.id}>
-            <div className={`swatch swatch-${item.id}`}>
-              {item.slot === "accessory" ? (
-                <PetArt species="kitten" accessory={item.id} />
-              ) : (
-                <DecorationArt
-                  item={item.id}
-                  slot={item.slot}
-                  label={item.name}
-                />
-              )}
-            </div>
-            <small>{item.slot}</small>
-            <h3>{item.name}</h3>
-            <button
-              className="secondary"
-              onClick={() => void act({ kind: "decorate", item: item.id })}
+        {catalog.map((item) => {
+          const seasonal = item.id.startsWith("christmas-");
+          const locked = seasonal && expired;
+          return (
+            <article
+              className={`paper decoration ${seasonal ? "christmas-decoration" : ""}`}
+              key={item.id}
             >
-              {world.room[item.slot] === item.id
-                ? "In your home"
-                : world.inventory.includes(item.id)
-                  ? "Place in home"
-                  : `Unlock · ${item.cost} treats`}
-            </button>
-          </article>
-        ))}
+              <div className={`swatch swatch-${item.id}`}>
+                {item.slot === "accessory" ? (
+                  <PetArt species="kitten" accessory={item.id} />
+                ) : (
+                  <DecorationArt
+                    item={item.id}
+                    slot={item.slot}
+                    label={item.name}
+                  />
+                )}
+              </div>
+              <small>{item.slot}</small>
+              {seasonal && (
+                <span className="christmas-label">
+                  {locked ? "Season ended" : "Christmas exclusive"}
+                </span>
+              )}
+              <h3>{item.name}</h3>
+              <button
+                className="secondary"
+                disabled={locked}
+                onClick={() => void act({ kind: "decorate", item: item.id })}
+              >
+                {locked ? (
+                  <>
+                    <Lock size={14} aria-hidden="true" /> Expired & locked
+                  </>
+                ) : world.room[item.slot] === item.id ? (
+                  "In your home"
+                ) : world.inventory.includes(item.id) ? (
+                  "Place in home"
+                ) : (
+                  `Unlock · ${item.cost} treats`
+                )}
+              </button>
+            </article>
+          );
+        })}
       </div>
     </>
   );

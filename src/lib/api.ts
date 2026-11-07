@@ -1,6 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import { care, initialWorld, species, catalog, tracks } from "./model";
+import {
+  care,
+  initialWorld,
+  species,
+  catalog,
+  tracks,
+  christmasExpired,
+} from "./model";
 import type { World, Action, Species } from "./model";
 const url = import.meta.env.VITE_SUPABASE_URL,
   key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
@@ -110,6 +117,10 @@ export async function command(
   } else if (input.kind === "decorate") {
     const item = catalog.find((i) => i.id === input.item);
     if (!item) throw new Error("Unknown decoration");
+    if (item.id.startsWith("christmas-") && christmasExpired())
+      throw new Error(
+        "The Christmas collection expired after December 31, 2026 and is locked.",
+      );
     if (!w.inventory.includes(item.id)) {
       if (w.treats < item.cost)
         throw new Error("A few more Love Treats and it is yours.");
