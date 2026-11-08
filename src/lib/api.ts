@@ -95,6 +95,16 @@ export async function command(
     const name = z.string().trim().min(1).max(24).parse(input.name);
     const p = w.pets.find((p) => p.id === input.pet);
     if (p) p.name = name;
+  } else if (input.kind === "memory") {
+    const body = z.string().trim().min(1).max(1000).parse(input.body);
+    w.memories = w.memories || [];
+    w.memories.unshift({
+      id: crypto.randomUUID(),
+      body,
+      author: "you",
+      created_at: new Date().toISOString(),
+    });
+    message = "A memory tucked into our jar.";
   } else if (input.kind === "letter") {
     const l = letterSchema.parse(input);
     w.letters.unshift({

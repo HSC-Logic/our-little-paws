@@ -32,6 +32,29 @@ describe("gentle care rules", () => {
 });
 describe("demo persistence", () => {
   beforeEach(() => localStorage.clear());
+  it("keeps trimmed memories across reloads without duplicate saves", async () => {
+    const key = crypto.randomUUID();
+    await command({ kind: "memory", body: "  Our first picnic  " }, key);
+    await command({ kind: "memory", body: "Our first picnic" }, key);
+    expect((await getWorld()).memories).toEqual([
+      expect.objectContaining({ body: "Our first picnic", author: "you" }),
+    ]);
+  });
+  it("rejects blank and oversized memories", async () => {
+    await expect(command({ kind: "memory", body: " \n " })).rejects.toThrow();
+    await expect(
+      command({ kind: "memory", body: "x".repeat(1001) }),
+    ).rejects.toThrow();
+    expect((await getWorld()).memories).toEqual([]);
+  });
+  it("supports demo worlds saved before the memory jar", async () => {
+    const old = initialWorld();
+    delete old.memories;
+    localStorage.setItem("little-paws-world-v1", JSON.stringify(old));
+    expect(
+      (await command({ kind: "memory", body: "A new memory" })).memories,
+    ).toHaveLength(1);
+  });
   it("adopts all nine distinct friends and rejects duplicates", async () => {
     expect(species).toHaveLength(9);
     for (const friend of species) {

@@ -374,7 +374,7 @@ function App() {
               <Route path="/mail" element={<Mailbox {...props} />} />
               <Route path="/decorate" element={<Decorate {...props} />} />
               <Route path="/play" element={<Games {...props} />} />
-              <Route path="/moments" element={<Moments world={world} />} />
+              <Route path="/moments" element={<Moments {...props} />} />
               <Route path="/settings" element={<SettingsRoom {...props} />} />
               <Route path="*" element={<HomeRoom {...props} />} />
             </Routes>

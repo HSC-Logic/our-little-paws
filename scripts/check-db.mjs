@@ -50,6 +50,9 @@ await db.exec(
 await db.exec(
   fs.readFileSync("supabase/migrations/202611070003_more_friends.sql", "utf8"),
 );
+await db.exec(
+  fs.readFileSync("supabase/migrations/202611080001_memory_jar.sql", "utf8"),
+);
 function check(ok, message) {
   if (!ok) throw Error(message);
   console.log("PASS " + message);
@@ -80,6 +83,50 @@ async function denied(fn, message) {
   }
   throw Error("Access unexpectedly allowed: " + message);
 }
+await as(a);
+const memoryKey = crypto.randomUUID();
+await action({ kind: "memory", body: "  Our first picnic  " }, memoryKey);
+const jar = await action({ kind: "memory", body: "Our first picnic" }, memoryKey);
+check(jar.memories.length === 1, "Memory saves are idempotent");
+check(jar.memories[0].body === "Our first picnic", "Memory notes are trimmed");
+check(jar.memories[0].author === a, "Memory author comes from authentication");
+await denied(
+  () => action({ kind: "memory", body: " \n\t " }),
+  "Blank memory denied",
+);
+await denied(
+  () => action({ kind: "memory", body: "x".repeat(1001) }),
+  "Oversized memory denied",
+);
+await denied(
+  () => action({ kind: "memory", body: 42 }),
+  "Non-text memory denied",
+);
+await denied(
+  () =>
+    db.exec(
+      "insert into public.memories(household_id,author,body) values('" +
+        h +
+        "','" +
+        a +
+        "','bypass')",
+    ),
+  "Direct memory writes denied",
+);
+await as(b);
+check(
+  (await world()).memories.length === 1,
+  "Partner can read shared memories",
+);
+await as(c);
+check(
+  (await world()).memories.length === 0,
+  "Other households cannot read memories through RPC",
+);
+check(
+  (await db.query("select * from public.memories")).rows.length === 0,
+  "Memory RLS isolates households",
+);
 await as(a);
 check(
   (await db.query("select * from public.households")).rows.length === 1,

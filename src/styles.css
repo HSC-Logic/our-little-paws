@@ -2060,3 +2060,39 @@ textarea {
   min-height: 44px;
   box-shadow: 0 3px 12px #0002;
 }
+
+.memory-jar {
+  padding: clamp(20px, 4vw, 36px);
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #fff9ed, #f9e9ed);
+}
+.memory-jar form {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.memory-jar textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+.memory-jar form button {
+  justify-self: start;
+}
+.memory-jar summary {
+  cursor: pointer;
+  padding: 12px 0;
+}
+.memory-notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 14px;
+}
+.memory-notes article {
+  padding: 20px;
+}
+.memory-notes p,
+.memory-drawn p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

@@ -49,7 +49,14 @@ export interface Track {
   mood: string;
   color: string;
 }
+export interface Memory {
+  id: string;
+  body: string;
+  author: string;
+  created_at: string;
+}
 export interface World {
+  memories?: Memory[];
   viewerId?: string;
   surprise?: string;
   songs?: Track[];
@@ -261,6 +268,7 @@ export const initialWorld = (): World => ({
   favoriteSongs: [],
   pets: [],
   letters: [],
+  memories: [],
   inventory: [],
   room: { wall: "cream", rug: "rose" },
   events: [],
