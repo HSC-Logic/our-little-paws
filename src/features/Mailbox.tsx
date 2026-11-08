@@ -12,20 +12,30 @@ export function Mailbox({ world, act }: Props) {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { isSubmitting },
   } = useForm<{
     subject: string;
     body: string;
     recipient: string;
     envelope: string;
+    occasion: string;
+    schedule: string;
+    opens_at: string;
   }>({
     defaultValues: {
       recipient:
         world.members.find((m) => m.id !== world.viewerId)?.id || "partner",
       envelope: "rose",
+      occasion: "just-because",
+      schedule: "now",
     },
   });
   const current = world.letters.find((l) => l.id === open);
+  const schedule = watch("schedule");
+  const locked = (letter: (typeof world.letters)[number]) =>
+    letter.locked ||
+    !!(letter.opens_at && Date.parse(letter.opens_at) > Date.now());
   return (
     <>
       <div className="section-heading">
@@ -64,7 +74,9 @@ export function Mailbox({ world, act }: Props) {
             <button
               key={l.id}
               className={`paper envelope envelope-${l.envelope}`}
+              disabled={locked(l)}
               onClick={() => {
+                if (locked(l)) return;
                 setOpen(l.id);
                 void act({ kind: "letter-state", id: l.id, read: true });
               }}
@@ -75,6 +87,15 @@ export function Mailbox({ world, act }: Props) {
                 {new Date(l.created_at).toLocaleDateString()}{" "}
                 {!l.read && " · Unopened"}
               </span>
+              {l.opens_at && (
+                <span>
+                  {locked(l) ? "Sealed until" : "Opening time:"}{" "}
+                  {new Date(l.opens_at).toLocaleString()}
+                </span>
+              )}
+              {l.occasion && l.occasion !== "just-because" && (
+                <span>{l.occasion}</span>
+              )}
             </button>
           ))}
       </div>
@@ -103,7 +124,17 @@ export function Mailbox({ world, act }: Props) {
             <h2 id="compose-title">A little love note</h2>
             <form
               onSubmit={handleSubmit(async (values) => {
-                if (await act({ kind: "letter", ...values })) {
+                const opensAt =
+                  values.schedule === "three-days"
+                    ? new Date(
+                        Date.now() + 3 * 24 * 60 * 60 * 1000,
+                      ).toISOString()
+                    : values.schedule === "custom"
+                      ? new Date(values.opens_at).toISOString()
+                      : null;
+                if (
+                  await act({ kind: "letter", ...values, opens_at: opensAt })
+                ) {
                   reset();
                   setCompose(false);
                 }
@@ -128,6 +159,44 @@ export function Mailbox({ world, act }: Props) {
                 </select>
               </label>
               <label>
+                Occasion
+                <select {...register("occasion")}>
+                  <option value="just-because">Just because</option>
+                  <option value="birthday">Birthday</option>
+                  <option value="anniversary">Anniversary</option>
+                  <option value="event">Special event</option>
+                </select>
+              </label>
+              <label>
+                When can it open?
+                <select {...register("schedule")}>
+                  <option value="now">Right away</option>
+                  <option value="three-days">After 3 days</option>
+                  <option value="custom">Choose a date and time</option>
+                </select>
+              </label>
+              {schedule === "custom" && (
+                <label>
+                  Opening date and time (your local time)
+                  <input
+                    type="datetime-local"
+                    required
+                    min={new Date(
+                      Date.now() +
+                        60_000 -
+                        new Date().getTimezoneOffset() * 60_000,
+                    )
+                      .toISOString()
+                      .slice(0, 16)}
+                    {...register("opens_at")}
+                  />
+                </label>
+              )}
+              <p>
+                Scheduled letters stay sealed until their opening time. Keep
+                this room open or return later to open them.
+              </p>
+              <label>
                 Subject
                 <input required maxLength={100} {...register("subject")} />
               </label>
@@ -148,7 +217,7 @@ export function Mailbox({ world, act }: Props) {
           </section>
         </Dialog>
       )}
-      {current && (
+      {current && !locked(current) && (
         <Dialog onClose={() => setOpen("")}>
           <motion.article
             initial={{ scale: 0.9, opacity: 0 }}

@@ -130,6 +130,7 @@ function App() {
   } = useQuery({
     queryKey: ["world"],
     queryFn: getWorld,
+    refetchInterval: 30_000,
     enabled: session === true,
   });
   useEffect(() => {

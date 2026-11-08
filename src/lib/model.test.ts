@@ -92,6 +92,40 @@ describe("demo persistence", () => {
       }),
     ).rejects.toThrow();
   });
+  it("seals scheduled letters until their opening time", async () => {
+    const opensAt = new Date(Date.now() + 3 * 86400000).toISOString();
+    const saved = await command({
+      kind: "letter",
+      subject: "Happy birthday",
+      body: "A surprise",
+      recipient: "partner",
+      envelope: "rose",
+      occasion: "birthday",
+      opens_at: opensAt,
+    });
+    const letter = saved.letters[0];
+    expect(letter.opens_at).toBe(opensAt);
+    expect(letter.occasion).toBe("birthday");
+    await expect(
+      command({ kind: "letter-state", id: letter.id, read: true }),
+    ).rejects.toThrow("sealed");
+    await expect(
+      command({
+        kind: "letter",
+        subject: "Late",
+        body: "Note",
+        recipient: "partner",
+        envelope: "rose",
+        opens_at: "2000-01-01T00:00:00Z",
+      }),
+    ).rejects.toThrow();
+    letter.opens_at = "2000-01-01T00:00:00Z";
+    localStorage.setItem("little-paws-world-v1", JSON.stringify(saved));
+    expect(
+      (await command({ kind: "letter-state", id: letter.id, read: true }))
+        .letters[0].read,
+    ).toBe(true);
+  });
   it("uses fixed game rewards and cooldowns", async () => {
     await command({
       kind: "game",

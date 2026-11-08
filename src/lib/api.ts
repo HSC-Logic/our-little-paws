@@ -19,6 +19,17 @@ const letterSchema = z.object({
   body: z.string().trim().min(1).max(4000),
   recipient: z.string().min(1),
   envelope: z.enum(["rose", "sage", "lavender"]),
+  occasion: z
+    .enum(["just-because", "birthday", "anniversary", "event"])
+    .default("just-because"),
+  opens_at: z.iso
+    .datetime({ offset: true })
+    .refine(
+      (value) => Date.parse(value) > Date.now(),
+      "Choose a future opening time",
+    )
+    .nullable()
+    .optional(),
 });
 export type Command = { kind: string; [key: string]: unknown };
 function receipts(): string[] {
@@ -121,6 +132,8 @@ export async function command(
   } else if (input.kind === "letter-state") {
     const l = w.letters.find((l) => l.id === input.id);
     if (l) {
+      if (l.opens_at && Date.parse(l.opens_at) > Date.now())
+        throw new Error("This letter is sealed until its opening time.");
       if (input.favorite !== undefined) l.favorite = !!input.favorite;
       if (input.read) l.read = true;
     }

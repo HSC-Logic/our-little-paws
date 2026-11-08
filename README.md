@@ -13,6 +13,7 @@
 - A responsive illustrated home; wallpapers, rugs, beds, and shared accessories purchased using non-purchasable Love Treats.
 - Music room with three original synthesized instrumental loops, playlist selection, favorites, volume/play controls, and dancing animals. Shared mode shares track selection and favorites. Playback controls remain device-local.
 - Private letters with recipients, three envelope styles, read state, favorites, filters, and accessible compose/open dialogs.
+- Scheduled love letters for birthdays, anniversaries, and special events: open after three days or at a chosen local date/time. Shared-mode message bodies remain server-locked until then; no email notification is sent. Demo locks are browser-local, not a secure time capsule.
 - Shared Memory Jar in Little moments: save notes, revisit the collection, and draw a surprise memory. Saved in both demo and authenticated households.
 - Catch the Treats (touch/mouse slider, arrow keys, and an accessible catch button) and Musical Notes (visual sequence, no audio needed). Start, pause, finish, scoring, and bounded participation gifts.
 - Six achievements, a wrapped affectionate surprise, and protected household name/greeting settings.

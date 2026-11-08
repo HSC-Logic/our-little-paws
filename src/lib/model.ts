@@ -32,9 +32,12 @@ export interface Pet {
   accessory?: string;
 }
 export interface Letter {
+  opens_at?: string | null;
+  occasion?: string;
+  locked?: boolean;
   id: string;
   subject: string;
-  body: string;
+  body?: string;
   envelope: string;
   recipient: string;
   sender: string;

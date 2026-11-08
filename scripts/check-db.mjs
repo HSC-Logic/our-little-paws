@@ -53,6 +53,12 @@ await db.exec(
 await db.exec(
   fs.readFileSync("supabase/migrations/202611080001_memory_jar.sql", "utf8"),
 );
+await db.exec(
+  fs.readFileSync(
+    "supabase/migrations/202611080002_scheduled_letters.sql",
+    "utf8",
+  ),
+);
 function check(ok, message) {
   if (!ok) throw Error(message);
   console.log("PASS " + message);
@@ -86,7 +92,10 @@ async function denied(fn, message) {
 await as(a);
 const memoryKey = crypto.randomUUID();
 await action({ kind: "memory", body: "  Our first picnic  " }, memoryKey);
-const jar = await action({ kind: "memory", body: "Our first picnic" }, memoryKey);
+const jar = await action(
+  { kind: "memory", body: "Our first picnic" },
+  memoryKey,
+);
 check(jar.memories.length === 1, "Memory saves are idempotent");
 check(jar.memories[0].body === "Our first picnic", "Memory notes are trimmed");
 check(jar.memories[0].author === a, "Memory author comes from authentication");
@@ -309,6 +318,74 @@ for (const [species, name] of [
 await denied(
   () => action({ kind: "adopt", species: "unknown" }),
   "Unknown friend denied",
+);
+await as(a);
+const scheduledKey = crypto.randomUUID();
+const scheduledCommand = {
+  kind: "letter",
+  subject: "Anniversary surprise",
+  body: "Our secret message",
+  recipient: b,
+  envelope: "rose",
+  occasion: "anniversary",
+  opens_at: new Date(Date.now() + 3 * 86400000).toISOString(),
+};
+const sealed = (await action(scheduledCommand, scheduledKey)).letters.find(
+  (letter) => letter.subject === scheduledCommand.subject,
+);
+check(
+  sealed.locked && !("body" in sealed),
+  "Scheduled body is withheld from sender RPC",
+);
+check(
+  (await action(scheduledCommand, scheduledKey)).letters.filter(
+    (letter) => letter.id === sealed.id,
+  ).length === 1,
+  "Scheduled sends are idempotent",
+);
+await as(b);
+check(
+  (await world()).letters.find((letter) => letter.id === sealed.id).locked,
+  "Recipient sees a sealed envelope",
+);
+check(
+  (await db.query("select * from public.letters where id=$1", [sealed.id])).rows
+    .length === 0,
+  "Direct reads cannot bypass the schedule",
+);
+await denied(
+  () => action({ kind: "letter-state", id: sealed.id, read: true }),
+  "Early opening denied",
+);
+await denied(
+  () => action({ ...scheduledCommand, opens_at: "2000-01-01T00:00:00Z" }),
+  "Past schedule denied",
+);
+await denied(
+  () => action({ ...scheduledCommand, opens_at: "not a date" }),
+  "Invalid schedule denied",
+);
+await as(c);
+check(
+  !(await world()).letters.some((letter) => letter.id === sealed.id),
+  "Scheduled envelope stays household-private",
+);
+await db.exec("reset role");
+await db.query(
+  "update public.letters set opens_at=now()-interval '1 second' where id=$1",
+  [sealed.id],
+);
+await as(b);
+check(
+  (await world()).letters.find((letter) => letter.id === sealed.id).body ===
+    scheduledCommand.body,
+  "Body releases after opening time",
+);
+check(
+  (
+    await action({ kind: "letter-state", id: sealed.id, read: true })
+  ).letters.find((letter) => letter.id === sealed.id).read,
+  "Released letter can be opened",
 );
 console.log(
   `${passed} database checks passed. Embedded PostgreSQL does not cover Supabase Realtime or Storage runtime.`,
