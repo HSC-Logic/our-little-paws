@@ -1,0 +1,16 @@
+{
+  "tool": "Built-in image_gen",
+  "prompts": {
+    "rug": "Create a Christmas variant of the reference rug. Same oval footprint, elevated isometric camera and soft painterly 3D plush textile style. Deep cranberry red fluffy pile, warm golden embroidered central star and elegant cream and gold scalloped stitched border. Single rug only, tightly framed, no floor, no text, genuine transparent background.",
+    "bed": "Create Christmas gift themed pet bed variant of reference bed. Preserve same oval silhouette and elevated three-quarter isometric camera. Soft cranberry red velvet padded bolster, cream quilted cushion, tasteful golden satin ribbon tied into a bow on front bolster, one small star cushion. Painterly cozy 3D fabric texture, warm upper-left sunlight and subtle contact shadow. Single bed only, no floor, no text, genuine transparent background.",
+    "hat": "Create a standalone wearable little Santa hat matching the soft painterly 3D plush style of the reference puppy. NO puppy in output. Cranberry red velvet floppy cap, ivory fluffy fur brim and pompom falling to right, delicate warm gold stitching. Front view slightly from above, wide oval opening/brim appropriate for sitting on puppy head, all hat fully visible. Warm upper-left lighting, detailed soft folds, no black outlines, no text, genuine transparent background.",
+    "wall": "Edit this room image to make the walls a polished cozy Christmas red and gold variant matching its existing painterly 3D illustration. Preserve exact camera, all furniture positions, floor, outdoors, window, door, plants and canvas dimensions. Replace the uneven patchy red wall recoloring with consistent muted cranberry painted wall panels, warm subtle gold wood trim, tasteful little evergreen garlands integrated with existing fairy lights. Keep central floor and lower-right bed slot empty for separate sprites. No pets, no central rug, no additional floor furniture. Preserve detailed soft warm sunlight and original room style."
+  },
+  "files": [
+    "christmas-rug.webp",
+    "christmas-bed.webp",
+    "christmas-hat.webp",
+    "room-christmas.webp"
+  ],
+  "processing": "Trim transparent sprite margins, resize and encode WebP with alpha preserved. Hat received a second background extraction pass."
+}

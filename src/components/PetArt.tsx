@@ -61,36 +61,13 @@ export function PetArt({
         </svg>
       )}
       {accessory === "christmas-hat" && (
-        <svg
-          className="pet-accessory hat-accessory"
-          viewBox="0 0 80 90"
+        <img
+          className="pet-accessory christmas-hat-accessory"
+          src={`${import.meta.env.BASE_URL}art/christmas-hat.webp`}
+          alt=""
           aria-hidden="true"
-        >
-          <path
-            d="M9 73Q21 5 54 12Q73 16 67 44L54 34Q43 30 40 73Z"
-            fill="#b92535"
-            stroke="#e6b854"
-            strokeWidth="3"
-          />
-          <rect
-            x="7"
-            y="67"
-            width="59"
-            height="15"
-            rx="7"
-            fill="#fff2d3"
-            stroke="#e6b854"
-            strokeWidth="3"
-          />
-          <circle
-            cx="67"
-            cy="44"
-            r="10"
-            fill="#fff2d3"
-            stroke="#e6b854"
-            strokeWidth="3"
-          />
-        </svg>
+          draggable={false}
+        />
       )}
       {activity === "sleep" && (
         <span className="pet-sleep" aria-hidden="true">

@@ -1,0 +1,6 @@
+{
+  "tool": "Built-in image_gen",
+  "prompt": "Standalone beautiful memory jar game asset, soft painterly 3D storybook style matching a cozy pastel dollhouse game. A round clear glass keepsake jar with open mouth, a softly padded blush fabric ribbon tied around neck, little heart charm, thick rounded glass base. A few folded cream, lavender and rose paper notes resting at bottom, tiny golden fairy lights inside, delicate reflections with visible transparent glass. Warm upper left sunshine, dimensional glass highlights and soft fabric texture, adorable and elegant. Front view slightly elevated, whole jar fully visible with generous clear margin, no lid, no lettering, no characters, no background glow, no floor. Genuine transparent background outside jar. Palette lavender pink cream and warm gold.",
+  "file": "memory-jar.webp",
+  "processing": "Trim transparent margins, resize to 650px wide, encode WebP preserving alpha."
+}
