@@ -8,7 +8,7 @@
 
 ## What works
 
-- Animated welcome and nine adoptable friends: Mochi, Luna, Coco, Peanut, Biscuit, Willow, Rosie, Maple, and Misty. The five new friends reuse the four original storybook illustrations with different coat tints. Adopt, select, rename, and care for each pet.
+- Animated welcome and twelve adoptable friends: Mochi, Luna, Coco, Peanut, Biscuit, Willow, Rosie, Maple, Misty, Pippin the fox, Hazel the hedgehog, and Bao the red panda. The three woodland friends have original painted artwork; five coat variants reuse the original four illustrations. Adopt, select, rename, and care for each pet.
 - Feed, treat, cuddle, head pats, play, groom, sleep/wake, and dance; bounded needs, cooldowns, adoption age, animation feedback, and activity history.
 - A responsive illustrated home; wallpapers, rugs, beds, and shared accessories purchased using non-purchasable Love Treats.
 - Music room with three original synthesized instrumental loops, playlist selection, favorites, volume/play controls, and dancing animals. Shared mode shares track selection and favorites. Playback controls remain device-local.
@@ -29,7 +29,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL printed by Vite (normally `http://localhost:5173`). Choose **Enter Our Little World**, then adopt your first friend. The home starts empty intentionally; all nine friends can be adopted for free.
+Open the URL printed by Vite (normally `http://localhost:5173`). Choose **Enter Our Little World**, then adopt your first friend. The home starts empty intentionally; all twelve friends can be adopted for free.
 
 ```sh
 npm run lint
@@ -211,3 +211,7 @@ This is an operational MVP. Accessories apply to all pets together, rather than 
 - [ ] Configure backups, account recovery, and appropriate audit-data retention.
 
 References used for integration decisions: [Vite getting started](https://vite.dev/guide/), [Supabase database functions](https://supabase.com/docs/guides/database/functions), and [Supabase row-level security](https://supabase.com/docs/guides/database/postgres/row-level-security).
+
+### Woodland friends update
+
+For an existing Supabase project with all earlier migrations applied, run only `supabase/migrations/202611090001_woodland_friends.sql` once in the SQL editor. This adds the fox, hedgehog and red panda to the database validation and adoption names without changing existing pets. Deploy the frontend with this migration. Local demo mode supports the new friends immediately.

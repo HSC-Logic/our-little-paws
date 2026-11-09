@@ -7,7 +7,10 @@ export type Species =
   | "kitten-willow"
   | "bunny-rosie"
   | "hamster-maple"
-  | "kitten-misty";
+  | "kitten-misty"
+  | "fox"
+  | "hedgehog"
+  | "redpanda";
 export type Action =
   | "feed"
   | "treat"
@@ -146,6 +149,27 @@ export const species: {
     trait: "Soft paws and a curious heart",
     likes: "Rainy windows, yarn & sleepy cuddles",
     color: "#b1c6cd",
+  },
+  {
+    key: "fox",
+    name: "Pippin",
+    trait: "A bright-eyed woodland sweetheart",
+    likes: "Leaf piles, hide-and-seek & fireside cuddles",
+    color: "#e7b48f",
+  },
+  {
+    key: "hedgehog",
+    name: "Hazel",
+    trait: "A tiny friend with a tender heart",
+    likes: "Cozy nests, garden strolls & gentle lullabies",
+    color: "#cbb49e",
+  },
+  {
+    key: "redpanda",
+    name: "Bao",
+    trait: "Fluffy tail, endless curiosity",
+    likes: "Climbing, leafy hideaways & afternoon naps",
+    color: "#d9a18d",
   },
 ];
 export const catalog = [

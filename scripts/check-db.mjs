@@ -41,6 +41,7 @@ await db.exec(
   fs.readFileSync("supabase/migrations/202611070001_november_song.sql", "utf8"),
 );
 let passed = 0;
+
 await db.exec(
   fs.readFileSync(
     "supabase/migrations/202611070002_christmas_collection.sql",
@@ -52,6 +53,12 @@ await db.exec(
 );
 await db.exec(
   fs.readFileSync("supabase/migrations/202611080001_memory_jar.sql", "utf8"),
+);
+await db.exec(
+  fs.readFileSync(
+    "supabase/migrations/202611090001_woodland_friends.sql",
+    "utf8",
+  ),
 );
 await db.exec(
   fs.readFileSync(
@@ -302,6 +309,9 @@ for (const [species, name] of [
   ["bunny-rosie", "Rosie"],
   ["hamster-maple", "Maple"],
   ["kitten-misty", "Misty"],
+  ["fox", "Pippin"],
+  ["hedgehog", "Hazel"],
+  ["redpanda", "Bao"],
 ]) {
   const adopted = await action({ kind: "adopt", species });
   check(

@@ -55,8 +55,8 @@ describe("demo persistence", () => {
       (await command({ kind: "memory", body: "A new memory" })).memories,
     ).toHaveLength(1);
   });
-  it("adopts all nine distinct friends and rejects duplicates", async () => {
-    expect(species).toHaveLength(9);
+  it("adopts all twelve distinct friends and rejects duplicates", async () => {
+    expect(species).toHaveLength(12);
     for (const friend of species) {
       await command({ kind: "adopt", species: friend.key });
       await expect(

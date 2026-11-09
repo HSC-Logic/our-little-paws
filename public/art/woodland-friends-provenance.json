@@ -1,0 +1,14 @@
+{
+  "tool": "Built-in image_gen",
+  "prompts": {
+    "fox": "Create a standalone A little orange fox kit with cream muzzle, chest and tail tip, large upright ears and a fluffy curled tail. Match reference puppy's soft painterly 3D storybook pet game style, adorable proportions, big luminous expressive eyes, subtle blush, detailed soft fur and warm upper-left sunlight. Sitting upright facing viewer, whole animal and tail visible, happy gentle expression. No clothing or accessories, no objects, no text, no floor or background, no outside glow. Genuine transparent background. This is a distinct animal species, do not reuse puppy anatomy.",
+    "hedgehog": "Create a standalone A tiny friendly hedgehog with rounded soft cinnamon spines, cream furry face and belly, little round ears and tiny pink paws. Match reference puppy's soft painterly 3D storybook pet game style, adorable proportions, big luminous expressive eyes, subtle blush, detailed soft fur and warm upper-left sunlight. Sitting upright facing viewer, whole animal and tail visible, happy gentle expression. No clothing or accessories, no objects, no text, no floor or background, no outside glow. Genuine transparent background. This is a distinct animal species, do not reuse puppy anatomy.",
+    "redpanda": "Create a standalone A little red panda cub with rust-red plush fur, cream face markings, dark tiny legs, rounded ears and a fluffy ringed tail curling around its side. Match reference puppy's soft painterly 3D storybook pet game style, adorable proportions, big luminous expressive eyes, subtle blush, detailed soft fur and warm upper-left sunlight. Sitting upright facing viewer, whole animal and tail visible, happy gentle expression. No clothing or accessories, no objects, no text, no floor or background, no outside glow. Genuine transparent background. This is a distinct animal species, do not reuse puppy anatomy."
+  },
+  "files": [
+    "fox.webp",
+    "hedgehog.webp",
+    "redpanda.webp"
+  ],
+  "processing": "Trim transparent margins, resize each to 550px wide and encode WebP preserving alpha."
+}

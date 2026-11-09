@@ -3585,3 +3585,111 @@ select {
     display: none;
   }
 }
+/* Woodland friends retain species-specific scale, including on phones. */
+.illustrated-room .pet-species-fox {
+  --room-pet-size: 13%;
+}
+.illustrated-room .pet-species-hedgehog {
+  --room-pet-size: 9%;
+}
+.illustrated-room .pet-species-redpanda {
+  --room-pet-size: 13%;
+}
+.illustrated-room .pet-position-9 {
+  left: calc(25% - var(--room-pet-size) / 2);
+  bottom: 34%;
+}
+.illustrated-room .pet-position-10 {
+  left: calc(55% - var(--room-pet-size) / 2);
+  bottom: 44%;
+}
+.illustrated-room .pet-position-11 {
+  left: calc(87% - var(--room-pet-size) / 2);
+  bottom: 40%;
+}
+.illustrated-pet.coat-fox .christmas-hat-accessory {
+  top: 12%;
+  left: 30%;
+  width: 39%;
+}
+.illustrated-pet.coat-hedgehog .christmas-hat-accessory {
+  top: 0;
+  left: 28%;
+  width: 42%;
+}
+.illustrated-pet.coat-redpanda .christmas-hat-accessory {
+  top: 7%;
+  left: 30%;
+  width: 40%;
+}
+
+/* Give a full family three staggered rows, with room for nameplates. */
+.illustrated-room.room-full-family .pet-species-puppy {
+  --room-pet-size: 10.5%;
+}
+.illustrated-room.room-full-family .pet-species-kitten {
+  --room-pet-size: 10.5%;
+}
+.illustrated-room.room-full-family .pet-species-bunny {
+  --room-pet-size: 10.5%;
+}
+.illustrated-room.room-full-family .pet-species-fox {
+  --room-pet-size: 10.5%;
+}
+.illustrated-room.room-full-family .pet-species-redpanda {
+  --room-pet-size: 10.5%;
+}
+.illustrated-room.room-full-family .pet-species-hamster {
+  --room-pet-size: 8%;
+}
+.illustrated-room.room-full-family .pet-species-hedgehog {
+  --room-pet-size: 8%;
+}
+.illustrated-room.room-full-family .pet-position-0 {
+  left: calc(31% - var(--room-pet-size) / 2);
+  bottom: 46%;
+}
+.illustrated-room.room-full-family .pet-position-1 {
+  left: calc(47% - var(--room-pet-size) / 2);
+  bottom: 46%;
+}
+.illustrated-room.room-full-family .pet-position-2 {
+  left: calc(63% - var(--room-pet-size) / 2);
+  bottom: 46%;
+}
+.illustrated-room.room-full-family .pet-position-3 {
+  left: calc(80% - var(--room-pet-size) / 2);
+  bottom: 46%;
+}
+.illustrated-room.room-full-family .pet-position-4 {
+  left: calc(22% - var(--room-pet-size) / 2);
+  bottom: 33%;
+}
+.illustrated-room.room-full-family .pet-position-5 {
+  left: calc(40% - var(--room-pet-size) / 2);
+  bottom: 33%;
+}
+.illustrated-room.room-full-family .pet-position-6 {
+  left: calc(58% - var(--room-pet-size) / 2);
+  bottom: 33%;
+}
+.illustrated-room.room-full-family .pet-position-7 {
+  left: calc(83% - var(--room-pet-size) / 2);
+  bottom: 33%;
+}
+.illustrated-room.room-full-family .pet-position-8 {
+  left: calc(17% - var(--room-pet-size) / 2);
+  bottom: 20%;
+}
+.illustrated-room.room-full-family .pet-position-9 {
+  left: calc(35% - var(--room-pet-size) / 2);
+  bottom: 20%;
+}
+.illustrated-room.room-full-family .pet-position-10 {
+  left: calc(53% - var(--room-pet-size) / 2);
+  bottom: 20%;
+}
+.illustrated-room.room-full-family .pet-position-11 {
+  left: calc(73% - var(--room-pet-size) / 2);
+  bottom: 20%;
+}

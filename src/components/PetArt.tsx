@@ -13,7 +13,7 @@ export function PetArt({
   return (
     <span
       role="img"
-      aria-label={`${species.split("-").join(" ")} ${activity}`}
+      aria-label={`${species === "redpanda" ? "red panda" : species.split("-").join(" ")} ${activity}`}
       className={`pet-art illustrated-pet coat-${species} ${activity} ${className}`}
     >
       <img

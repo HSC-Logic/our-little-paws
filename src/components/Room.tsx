@@ -30,7 +30,9 @@ export function Room({
     now,
   ));
   return (
-    <div className={`room illustrated-room wall-${wall} rug-${rug} bed-${bed}`}>
+    <div
+      className={`room illustrated-room wall-${wall} rug-${rug} bed-${bed} ${pets.length > 9 ? "room-full-family" : ""}`}
+    >
       <div className="room-scene">
         <img
           className="room-art"
